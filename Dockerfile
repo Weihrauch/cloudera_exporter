@@ -10,6 +10,7 @@ LABEL version="1.3"
 LABEL description="Keedio Cloudera Exporter Builder"
 LABEL vendor="keedio"
 LABEL image_name="cloudera_exporter_builder"
+LABEL source="https://github.com/eyalfir/cloudera_exporter/"
 
 # System Configs
 WORKDIR /go
