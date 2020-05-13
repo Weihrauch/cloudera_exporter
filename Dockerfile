@@ -49,7 +49,7 @@ RUN go build -o cloudera_exporter cloudera_exporter.go
 ####################
 ## STEP 2: Run    ##
 ####################
-FROM scratch
+FROM alpine
 
 # Labels
 LABEL maintainer="Keedio Sistemas <systems@keedio.com>"
