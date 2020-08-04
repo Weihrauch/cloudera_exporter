@@ -2,7 +2,7 @@
 ## STEP 1: Build  ##
 ####################
 # Image Base
-FROM golang:1.12 AS builder
+FROM golang:1.14 AS builder
 
 # Labels
 LABEL maintainer="Keedio Sistemas <systems@keedio.com>"
@@ -10,6 +10,7 @@ LABEL version="1.3"
 LABEL description="Keedio Cloudera Exporter Builder"
 LABEL vendor="keedio"
 LABEL image_name="cloudera_exporter_builder"
+LABEL source="https://github.com/eyalfir/cloudera_exporter/"
 
 # System Configs
 WORKDIR /go
@@ -48,7 +49,7 @@ RUN go build -o cloudera_exporter cloudera_exporter.go
 ####################
 ## STEP 2: Run    ##
 ####################
-FROM scratch
+FROM alpine
 
 # Labels
 LABEL maintainer="Keedio Sistemas <systems@keedio.com>"
