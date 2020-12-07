@@ -34,18 +34,6 @@ import (
 
 
 /* ======================================================================
- * Data Structs
- * ====================================================================== */
-// None
-
-type relationa struct {
-  Query *string
-  Metric_struct prometheus.Desc
-}
-
-
-
-/* ======================================================================
  * Constants with the Host module TSquery sentences
  * ====================================================================== */
 const SPARK_SCRAPER_NAME = "spark"
@@ -162,7 +150,7 @@ var (
   spark_write_rate =                          create_spark_metric_struct("write_bytes_rate", "The number of bytes written to the device.")
 
 )
-var spark_query_variable_relationship = []relationa {
+var spark_query_variable_relationship = []relation {
   {&SPARK_CATALOG_JVM_COMITTED_BYTES,          *spark_catalog_jvm_comitted_bytes},
   {&SPARK_CATALOG_JVM_CURRENT_BYTES,           *spark_catalog_jvm_current_bytes},
   {&SPARK_CATALOG_JVM_INIT_BYTES,              *spark_catalog_jvm_init_bytes},
@@ -280,47 +268,42 @@ func create_spark_metric (ctx context.Context, config Collector_connection_data,
 /* ======================================================================
  * Scrape "Class"
  * ====================================================================== */
-// ScrapeSpark struct
-type ScrapeSparkMetrics struct{}
+// ScrapeSPARK struct
+type ScrapeSPARK struct{}
 
 // Name of the Scraper. Should be unique.
-func (ScrapeSparkMetrics) Name() string {
+func (ScrapeSPARK) Name() string {
   return SPARK_SCRAPER_NAME
 }
 
 // Help describes the role of the Scraper.
-func (ScrapeSparkMetrics) Help() string {
-    return "Collect Spark Service Metrics"
+func (ScrapeSPARK) Help() string {
+  return "SPARK Metrics"
 }
 
 // Version.
-func (ScrapeSparkMetrics) Version() float64 {
-    return 1.0
+func (ScrapeSPARK) Version() float64 {
+  return 1.0
 }
 
-func (ScrapeSparkMetrics) Scrape(ctx context.Context, config *Collector_connection_data, ch chan<- prometheus.Metric) error {
-  log.Debug_msg("Ejecutando Hosts Metrics Scraper")
+// Scrape generic function. Override for host module.
+func (ScrapeSPARK) Scrape (ctx context.Context, config *Collector_connection_data, ch chan<- prometheus.Metric) error {
+  log.Debug_msg("Ejecutando SPARK Metrics Scraper")
 
   // Queries counters
   success_queries := 0
   error_queries := 0
 
-  // Get Cloudera Version
-  cm_version := get_cloudera_manager_version(ctx, *config)
-  log.Debug_msg("Version Cloudera: %s", cm_version)
-  load_spark_queries(cm_version)
-
-
   // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
   for i:=0 ; i < len(spark_query_variable_relationship) ; i++ {
-    if create_spark_metric(ctx, *config, *spark_query_variable_relationship[i].Query, spark_query_variable_relationship[i].Metric_struct, ch) {
+    if create_spark_metric(ctx, *config, spark_query_variable_relationship[i].Query, spark_query_variable_relationship[i].Metric_struct, ch) {
       success_queries += 1
     } else {
       error_queries += 1
     }
   }
-  log.Debug_msg("In the Spark Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
+  log.Debug_msg("In the SPARK Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
   return nil
 }
 
-
+var _ Scraper = ScrapeSPARK{}
