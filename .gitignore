@@ -4,3 +4,4 @@ alias
 .idea/workspace.xml
 *tar
 cloudera_exporter
+config.ini
