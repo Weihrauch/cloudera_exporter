@@ -151,6 +151,11 @@ func parse_yarn_module_flag (config_reader *ini.File) bool {
   return yarn_module_flag
 }
 
+func parse_spark_module_flag (config_reader *ini.File) bool {
+  spark_module_flag := config_reader.Section("modules").Key("spark_module").MustBool(false)
+  return spark_module_flag
+}
+
 
 func parse_num_procs (config_reader *ini.File) (int, error) {
   num_procs := config_reader.Section("system").Key("num_procs").MustInt(0)
