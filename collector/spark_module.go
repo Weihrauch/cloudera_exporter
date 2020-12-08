@@ -90,6 +90,8 @@
     SPARK_THRIFT_CONNECTIONS_RATE =              "SELECT LAST(INTEGRAL(thrift_server_catalog_service_connections_rate)) WHERE serviceType = \"SPARK\""
     SPARK_THRIFT_CONNECTIONS_USED =              "SELECT LAST(thrift_server_catalog_service_connections_in_use) WHERE serviceType = \"SPARK\""
     SPARK_WRITE_RATE =                           "SELECT LAST(INTEGRAL(write_bytes_rate)) WHERE serviceType = \"SPARK\""
+SPARK_YARN_HISTORY_SERVER =                           "SELECT cpu_system_rate + cpu_user_rate where serviceName=\"SPARK\""
+    
   )
  
  
@@ -149,6 +151,7 @@
    spark_thrift_connections_rate =             create_spark_metric_struct("thrift_server_catalog_service_connections_rate", "The total number of connections made to this Catalog Server's catalog service over its lifetime.")
    spark_thrift_connections_used =             create_spark_metric_struct("thrift_server_catalog_service_connections_in_use", "The number of active catalog service connections to this Catalog Server.")
    spark_write_rate =                          create_spark_metric_struct("write_bytes_rate", "The number of bytes written to the device.")
+   spark_yarn_history_server =                          create_spark_metric_struct("yarn_cpu_cores", "The number of bytes written to the device.")
  
  )
  var spark_query_variable_relationship = []relation {
@@ -202,6 +205,7 @@
    {SPARK_THRIFT_CONNECTIONS_RATE,             *spark_thrift_connections_rate},
    {SPARK_THRIFT_CONNECTIONS_USED,             *spark_thrift_connections_used},
    {SPARK_WRITE_RATE,                          *spark_write_rate},
+   {SPARK_YARN_HISTORY_SERVER,                          *spark_yarn_history_server},
  }
  
  

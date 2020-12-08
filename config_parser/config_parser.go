@@ -254,6 +254,7 @@ func Parse_config(config interface{}) (*CE_config, error) {
   host_module_flag := parse_host_module_flag (cfg)
   impala_module_flag := parse_impala_module_flag (cfg)
   hdfs_module_flag := parse_hdfs_module_flag (cfg)
+  spark_module_flag := parse_spark_module_flag (cfg)
   yarn_module_flag := parse_yarn_module_flag (cfg)
 
 
@@ -295,7 +296,8 @@ func Parse_config(config interface{}) (*CE_config, error) {
         cl.ScrapeHost{}: host_module_flag,
         cl.ScrapeImpalaMetrics{}: impala_module_flag,
         cl.ScrapeHDFS{}: hdfs_module_flag,
-        cl.ScrapeYARNMetrics{}: yarn_module_flag,
+        cl.ScrapeSPARK{}: spark_module_flag,
+        cl.ScrapeYARN{}: yarn_module_flag,
       },
     },
   deploy_ip,
