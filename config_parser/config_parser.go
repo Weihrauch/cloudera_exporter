@@ -146,6 +146,23 @@ func parse_hdfs_module_flag (config_reader *ini.File) bool {
   return hdfs_module_flag
 }
 
+func parse_hue_module_flag (config_reader *ini.File) bool {
+  hue_module_flag := config_reader.Section("modules").Key("hue_module").MustBool(false)
+  return hue_module_flag
+}
+func parse_sentry_module_flag (config_reader *ini.File) bool {
+  sentry_module_flag := config_reader.Section("modules").Key("sentry_module").MustBool(false)
+  return sentry_module_flag
+}
+func parse_hive_module_flag (config_reader *ini.File) bool {
+  hive_module_flag := config_reader.Section("modules").Key("hive_module").MustBool(false)
+  return hive_module_flag
+}
+func parse_oozie_module_flag (config_reader *ini.File) bool {
+  oozie_module_flag := config_reader.Section("modules").Key("oozie_module").MustBool(false)
+  return oozie_module_flag
+}
+
 func parse_yarn_module_flag (config_reader *ini.File) bool {
   yarn_module_flag := config_reader.Section("modules").Key("yarn_module").MustBool(false)
   return yarn_module_flag
@@ -254,6 +271,10 @@ func Parse_config(config interface{}) (*CE_config, error) {
   host_module_flag := parse_host_module_flag (cfg)
   impala_module_flag := parse_impala_module_flag (cfg)
   hdfs_module_flag := parse_hdfs_module_flag (cfg)
+  hue_module_flag := parse_hue_module_flag (cfg)
+  sentry_module_flag := parse_sentry_module_flag (cfg)
+  hive_module_flag := parse_hive_module_flag (cfg)
+  oozie_module_flag := parse_oozie_module_flag (cfg)
   spark_module_flag := parse_spark_module_flag (cfg)
   yarn_module_flag := parse_yarn_module_flag (cfg)
 
@@ -296,6 +317,10 @@ func Parse_config(config interface{}) (*CE_config, error) {
         cl.ScrapeHost{}: host_module_flag,
         cl.ScrapeImpalaMetrics{}: impala_module_flag,
         cl.ScrapeHDFS{}: hdfs_module_flag,
+        cl.ScrapeHUE{}: hue_module_flag,
+        cl.ScrapeSENTRY{}: sentry_module_flag,
+        cl.ScrapeHIVE{}: hive_module_flag,
+        cl.ScrapeOOZIE{}: oozie_module_flag,
         cl.ScrapeSPARK{}: spark_module_flag,
         cl.ScrapeYARN{}: yarn_module_flag,
       },

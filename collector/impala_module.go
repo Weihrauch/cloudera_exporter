@@ -1,6 +1,6 @@
 /*
  *
- * title           :collector/hdfs_module.go
+ * title           :collector/impala_module.go
  * description     :Submodule Collector for the Cluster HDFS metrics
  * author               :Raul Barroso
  * co-author           :Alejandro Villegas
