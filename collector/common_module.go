@@ -121,10 +121,12 @@ func make_query(ctx context.Context, uri string, user string, passwd string) (bo
 
   if err != nil {
     log.Err_msg("%s", err)
+    res.Body.Close()
     return "", err
   }
   if res == nil {
     log.Err_msg("HTTP response is NULL")
+    res.Body.Close()
     return "", errors.New("HTTP response is NULL")
   }
   if res.StatusCode < 200 || res.StatusCode >= 400 {
