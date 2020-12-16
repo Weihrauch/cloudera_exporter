@@ -18,7 +18,7 @@ package collector
 import (
   // Go Default libraries
   "context"
-  "crypto/tls"
+  // "crypto/tls"
   "errors"
   "fmt"
   "github.com/mitchellh/mapstructure"
@@ -30,6 +30,7 @@ import (
   // Own libraries
   jp "keedio/cloudera_exporter/json_parser"
   log "keedio/cloudera_exporter/logger"
+  pool "keedio/cloudera_exporter/pool"
   //cp "keedio/cloudera_exporter/config_parser"
 
   // Go Prometheus libraries
@@ -61,6 +62,7 @@ var Config = &ce_config{}
 type ce_collectors_flags struct {
   Scrapers map [Scraper] bool
 }
+
 type ce_config struct {
   Num_procs int
   Connection Collector_connection_data
@@ -69,6 +71,8 @@ type ce_config struct {
   Deploy_port uint
   Log_level int
   Api_request_type string
+  Req_per_seconds int
+  Max_connexions int
 }
 func SendConf(conf interface{}) {
   _ = mapstructure.Decode(conf, Config)
@@ -82,21 +86,7 @@ func SendConf(conf interface{}) {
  // Make the query specified to the Cloudera Manager API and returns the JSON response
 func make_query(ctx context.Context, uri string, user string, passwd string) (body string, err error) {
   log.Debug_msg("Making API Query: %s ", uri)
-
-
-  //fmt.Printf("Config: %#v\n", Config.Api_request_type)
-  var httpClient *http.Client
-  if(Config.Api_request_type == "https") {
-    tr := &http.Transport{
-      TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-    }
-    httpClient = &http.Client{Transport: tr}
-  }else{
-    httpClient = http.DefaultClient
-  }
-  // Get HTTP Protocol Client
-  //httpClient := http.DefaultClient
-
+  
   // Build the request Object
   req, err := http.NewRequest(http.MethodGet, uri, nil)
 
@@ -117,7 +107,8 @@ func make_query(ctx context.Context, uri string, user string, passwd string) (bo
   req.SetBasicAuth(user, passwd)
 
   // Make the API request
-  res, err := httpClient.Do(req)
+  // res, err := httpClient.Do(req)
+  res, err := pool.GetPClient().Do(req)
 
   if err != nil {
     log.Err_msg("%s", err)

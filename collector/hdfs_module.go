@@ -217,6 +217,7 @@ func (ScrapeHDFS) Scrape (ctx context.Context, config *Collector_connection_data
   success_queries := 0
   error_queries := 0
 
+  
   // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
   for i:=0 ; i < len(hdfs_query_variable_relationship) ; i++ {
     if create_hdfs_metric(ctx, *config, hdfs_query_variable_relationship[i].Query, hdfs_query_variable_relationship[i].Metric_struct, ch) {

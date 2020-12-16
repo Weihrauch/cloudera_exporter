@@ -30,6 +30,7 @@ import (
   cl "keedio/cloudera_exporter/collector"
   cp "keedio/cloudera_exporter/config_parser"
   log "keedio/cloudera_exporter/logger"
+  pool "keedio/cloudera_exporter/pool"
 
   // Go external libraries
   "gopkg.in/alecthomas/kingpin.v2"
@@ -191,6 +192,9 @@ func parse_flags_and_config_file() error {
       return err
     }
   }
+
+  log.Info_msg("Exporter Version: %s", version.Version)
+
   cl.SendConf(config)
   return nil
 }
@@ -211,6 +215,9 @@ func main(){
     return
   }
   log.Init(os.Stdout, os.Stdout, os.Stdout, os.Stderr, os.Stdout, config.Log_level)
+
+  // Create HttpPool
+  pool.Init(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
 
   //Parallel Execution
   runtime.GOMAXPROCS(config.Num_procs)

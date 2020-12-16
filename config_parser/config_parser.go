@@ -36,6 +36,8 @@ import (
   error_msg_no_deploy_ip = "No deploy_ip specified in config file. The exporter will use the public IP"
   error_msg_no_deploy_port = "No deploy_port specified in config file"
   error_msg_no_log_level = "No log_level specified in config file"
+  error_msg_no_max_connexions = "No max_connexions specified in config file"
+  error_msg_no_req_per_seconds = "No req_per_seconds specified in config file"
 )
 
 
@@ -57,6 +59,8 @@ type CE_config struct {
   Deploy_ip string
   Deploy_port uint
   Log_level int
+  Max_connexions int
+  Req_per_seconds int
   Api_request_type string
 }
 
@@ -210,6 +214,24 @@ func parse_log_level (config_reader *ini.File) (int, error) {
   return log_level, nil
 }
 
+func parse_max_connexions (config_reader *ini.File) (int, error) {
+  max_connexions := config_reader.Section("system").Key("max_connexions").MustInt(-1)
+  if max_connexions == -1 {
+    log.Err_msg(error_msg_no_max_connexions)
+    return 0, errors.New(error_msg_no_max_connexions)
+  }
+  return max_connexions, nil
+}
+
+func parse_req_per_seconds (config_reader *ini.File) (int, error) {
+  req_per_seconds := config_reader.Section("system").Key("req_per_seconds").MustInt(-1)
+  if req_per_seconds == -1 {
+    log.Err_msg(error_msg_no_req_per_seconds)
+    return 0, errors.New(error_msg_no_req_per_seconds)
+  }
+  return req_per_seconds, nil
+}
+
 
 func Parse_config(config interface{}) (*CE_config, error) {
   var err error
@@ -301,6 +323,18 @@ func Parse_config(config interface{}) (*CE_config, error) {
     return nil, err
   }
 
+  max_connexions, err := parse_max_connexions(cfg)
+  if err != nil && err.Error() != error_msg_no_max_connexions {
+    log.Err_msg("Can't parse max_connexions field")
+    return nil, err
+  }
+
+  req_per_seconds, err := parse_req_per_seconds(cfg)
+  if err != nil && err.Error() != error_msg_no_req_per_seconds {
+    log.Err_msg("Can't parse req_per_seconds field")
+    return nil, err
+  }
+
 
   return &CE_config {
     num_procs,
@@ -328,6 +362,8 @@ func Parse_config(config interface{}) (*CE_config, error) {
   deploy_ip,
   deploy_port,
   log_level,
+  max_connexions,
+  req_per_seconds,
   api_request_type,
   },
   nil

@@ -26,6 +26,7 @@ COPY ./collector ./collector
 COPY ./config_parser ./config_parser
 COPY ./json_parser ./json_parser
 COPY ./logger ./logger
+COPY ./pool ./pool
 COPY ./cloudera_exporter.go ./cloudera_exporter.go
 COPY ./config.ini ./config.ini
 RUN go mod init keedio/cloudera_exporter
