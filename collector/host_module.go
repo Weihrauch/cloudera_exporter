@@ -26,6 +26,7 @@ import (
 
   // Go Prometheus libraries
 	"github.com/prometheus/client_golang/prometheus"
+  pool "keedio/cloudera_exporter/pool"
 )
 
 
@@ -216,9 +217,9 @@ func create_host_metric_struct(metric_name string, description string) *promethe
 // For this module, the cluster to which the host belongs is indifferent.  The
 // name of the cluster to which the host belongs is associated as metadata to
 // its corresponding metric
-func create_host_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric) bool {
+func create_host_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
   // Make the query
-  json_parsed, err := make_and_parse_timeseries_query(ctx, config, query)
+  json_parsed, err := make_and_parse_timeseries_query(ctx, config, query, pclient)
   if err != nil {
     return false
   }
@@ -289,9 +290,10 @@ func (ScrapeHost) Scrape (ctx context.Context, config *Collector_connection_data
   success_queries := 0
   error_queries := 0
 
+  pclient := pool.NewPClient()
   // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
   for i:=0 ; i < len(host_query_variable_relationship) ; i++ {
-    if create_host_metric(ctx, *config, host_query_variable_relationship[i].Query, host_query_variable_relationship[i].Metric_struct, ch) {
+    if create_host_metric(ctx, *config, host_query_variable_relationship[i].Query, host_query_variable_relationship[i].Metric_struct, ch, pclient) {
       success_queries += 1
     } else {
       error_queries += 1

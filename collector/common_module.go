@@ -26,6 +26,7 @@ import (
   "net/http"
   "strconv"
   "strings"
+	"crypto/tls"
 
   // Own libraries
   jp "keedio/cloudera_exporter/json_parser"
@@ -84,9 +85,21 @@ func SendConf(conf interface{}) {
  * Functions
  * ====================================================================== */
  // Make the query specified to the Cloudera Manager API and returns the JSON response
-func make_query(ctx context.Context, uri string, user string, passwd string) (body string, err error) {
+func make_query(ctx context.Context, uri string, user string, passwd string, pclient *pool.PClient) (body string, err error) {
   log.Debug_msg("Making API Query: %s ", uri)
   
+  var httpClient *http.Client
+  // var req http.Request 
+
+  if(Config.Api_request_type == "https") {
+    tr := &http.Transport{
+      TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+    }
+    httpClient = &http.Client{Transport: tr}
+  }else{
+    httpClient = http.DefaultClient
+  }
+
   // Build the request Object
   req, err := http.NewRequest(http.MethodGet, uri, nil)
 
@@ -100,15 +113,24 @@ func make_query(ctx context.Context, uri string, user string, passwd string) (bo
     req = req.WithContext(ctx)
   }
 
+  
   // Request response header
   req.Header.Add("Content-Type", "application/json")
 
   // Set Authentication credentials
   req.SetBasicAuth(user, passwd)
 
+  var res *http.Response
+  // var errRes *error
   // Make the API request
+  if(pclient != nil){
+    res, err = pclient.Do(req)
+  }else{
+    res, err = httpClient.Do(req)
+  }
+  
   // res, err := httpClient.Do(req)
-  res, err := pool.GetPClient().Do(req)
+  // if(pclient) res, err := pool.GetPClient().Do(req)
 
   if err != nil {
     log.Err_msg("%s", err)
@@ -154,6 +176,7 @@ func init_host_types_map(ctx context.Context, config Collector_connection_data) 
       fmt.Sprintf("hosts")),
     config.User,
     config.Passwd,
+    nil,
   )
   json_hosts_results := jp.Parse_json_response(json_hosts_data)
   num_hosts, _ := strconv.Atoi(jp.Get_json_field(json_hosts_results, "items.#"))
@@ -176,6 +199,7 @@ func look_for_border_nodes(ctx context.Context, config Collector_connection_data
       fmt.Sprintf("clusters/%s/services/hdfs/roles", cluster_name)),
     config.User,
     config.Passwd,
+    nil,
   )
 
   // Parse JSON Response
@@ -206,6 +230,7 @@ func look_for_worker_nodes(ctx context.Context, config Collector_connection_data
       fmt.Sprintf("clusters/%s/services/hdfs/roles", cluster_name)),
     config.User,
     config.Passwd,
+    nil,
   )
 
   // Parse JSON Response
@@ -235,6 +260,7 @@ func look_for_master_nodes(ctx context.Context, config Collector_connection_data
       fmt.Sprintf("cm/service/roles")),
     config.User,
       config.Passwd,
+      nil,
   )
 
   // Parse JSON Response
@@ -267,6 +293,7 @@ func get_type_node_list (ctx context.Context, config Collector_connection_data) 
       fmt.Sprintf("clusters")),
     config.User,
     config.Passwd,
+    nil,
   )
 
   // Parse JSON Response
@@ -302,7 +329,7 @@ func get_if_is_worker (host_id string) string {
 
 
 // Make the query and parse the json response.
-func make_and_parse_timeseries_query(ctx context.Context, config Collector_connection_data, query string) (result gjson.Result, err error) {
+func make_and_parse_timeseries_query(ctx context.Context, config Collector_connection_data, query string, pclient *pool.PClient) (result gjson.Result, err error) {
   // Make query
   json_timeseries, err := make_query(
     ctx,
@@ -313,6 +340,7 @@ func make_and_parse_timeseries_query(ctx context.Context, config Collector_conne
       jp.Encode_tsquery_to_http(query)),
     config.User,
     config.Passwd,
+    pclient,
   )
 
   // parse and return the result
@@ -335,6 +363,7 @@ func make_and_parse_api_query(ctx context.Context, config Collector_connection_d
       query),
     config.User,
     config.Passwd,
+    nil,
   )
 
   // parse and return the result
@@ -361,6 +390,7 @@ func Get_api_cloudera_version(ctx context.Context, config Collector_connection_d
     fmt.Sprintf("http://%s:%s/api/version", config.Host, config.Port),
     config.User,
     config.Passwd,
+    nil,
   )
   if err != nil {
     return "", errors.New("The exporter can not determine the API version by consulting the cloudera Manager API")

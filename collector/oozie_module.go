@@ -25,6 +25,7 @@
   
     // Go Prometheus libraries
     "github.com/prometheus/client_golang/prometheus"
+    pool "keedio/cloudera_exporter/pool"
   )
   
   
@@ -1057,9 +1058,9 @@ OOZIE_WRITE_BYTES_RATE                                                          
  
  // Generic function to extract de metadata associated with the query value
  // Only for OOZIE metric type
- func create_oozie_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric) bool {
+ func create_oozie_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
    // Make the query
-   json_parsed, err := make_and_parse_timeseries_query(ctx, config, query)
+   json_parsed, err := make_and_parse_timeseries_query(ctx, config, query, pclient)
    if err != nil {
      return false
    }
@@ -1121,9 +1122,10 @@ OOZIE_WRITE_BYTES_RATE                                                          
    success_queries := 0
    error_queries := 0
  
+   pclient := pool.NewPClient()
    // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
    for i:=0 ; i < len(oozie_query_variable_relationship) ; i++ {
-     if create_oozie_metric(ctx, *config, oozie_query_variable_relationship[i].Query, oozie_query_variable_relationship[i].Metric_struct, ch) {
+     if create_oozie_metric(ctx, *config, oozie_query_variable_relationship[i].Query, oozie_query_variable_relationship[i].Metric_struct, ch, pclient) {
        success_queries += 1
      } else {
        error_queries += 1

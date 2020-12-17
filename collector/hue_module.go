@@ -26,6 +26,7 @@ import (
 
   // Go Prometheus libraries
 	"github.com/prometheus/client_golang/prometheus"
+  pool "keedio/cloudera_exporter/pool"
 )
 
 
@@ -514,9 +515,9 @@ func create_hue_metric_struct(metric_name string, description string) *prometheu
 
 // Generic function to extract de metadata associated with the query value
 // Only for HUE metric type
-func create_hue_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric) bool {
+func create_hue_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
   // Make the query
-  json_parsed, err := make_and_parse_timeseries_query(ctx, config, query)
+  json_parsed, err := make_and_parse_timeseries_query(ctx, config, query, pclient)
   if err != nil {
     return false
   }
@@ -578,9 +579,10 @@ func (ScrapeHUE) Scrape (ctx context.Context, config *Collector_connection_data,
   success_queries := 0
   error_queries := 0
 
+  pclient := pool.NewPClient()
   // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
   for i:=0 ; i < len(hue_query_variable_relationship) ; i++ {
-    if create_hue_metric(ctx, *config, hue_query_variable_relationship[i].Query, hue_query_variable_relationship[i].Metric_struct, ch) {
+    if create_hue_metric(ctx, *config, hue_query_variable_relationship[i].Query, hue_query_variable_relationship[i].Metric_struct, ch, pclient) {
       success_queries += 1
     } else {
       error_queries += 1

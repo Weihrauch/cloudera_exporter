@@ -26,6 +26,7 @@
  
    // Go Prometheus libraries
    "github.com/prometheus/client_golang/prometheus"
+   pool "keedio/cloudera_exporter/pool"
  )
  
  
@@ -180,9 +181,9 @@
  
  // Generic function to extract de metadata associated with the query value
  // Only for SENTRY metric type
- func create_sentry_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric) bool {
+ func create_sentry_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
    // Make the query
-   json_parsed, err := make_and_parse_timeseries_query(ctx, config, query)
+   json_parsed, err := make_and_parse_timeseries_query(ctx, config, query, pclient)
    if err != nil {
      return false
    }
@@ -244,9 +245,10 @@
    success_queries := 0
    error_queries := 0
  
+   pclient := pool.NewPClient()
    // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
    for i:=0 ; i < len(sentry_query_variable_relationship) ; i++ {
-     if create_sentry_metric(ctx, *config, sentry_query_variable_relationship[i].Query, sentry_query_variable_relationship[i].Metric_struct, ch) {
+     if create_sentry_metric(ctx, *config, sentry_query_variable_relationship[i].Query, sentry_query_variable_relationship[i].Metric_struct, ch, pclient) {
        success_queries += 1
      } else {
        error_queries += 1

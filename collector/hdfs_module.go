@@ -26,6 +26,7 @@ import (
 
   // Go Prometheus libraries
 	"github.com/prometheus/client_golang/prometheus"
+  pool "keedio/cloudera_exporter/pool"
 )
 
 
@@ -153,9 +154,9 @@ func create_hdfs_metric_struct(metric_name string, description string) *promethe
 
 // Generic function to extract de metadata associated with the query value
 // Only for HDFS metric type
-func create_hdfs_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric) bool {
+func create_hdfs_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric,pclient *pool.PClient) bool {
   // Make the query
-  json_parsed, err := make_and_parse_timeseries_query(ctx, config, query)
+  json_parsed, err := make_and_parse_timeseries_query(ctx, config, query, pclient)
   if err != nil {
     return false
   }
@@ -217,10 +218,11 @@ func (ScrapeHDFS) Scrape (ctx context.Context, config *Collector_connection_data
   success_queries := 0
   error_queries := 0
 
-  
+  // Create a pool for HDFS  
+  pclient := pool.NewPClient()
   // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
   for i:=0 ; i < len(hdfs_query_variable_relationship) ; i++ {
-    if create_hdfs_metric(ctx, *config, hdfs_query_variable_relationship[i].Query, hdfs_query_variable_relationship[i].Metric_struct, ch) {
+    if create_hdfs_metric(ctx, *config, hdfs_query_variable_relationship[i].Query, hdfs_query_variable_relationship[i].Metric_struct, ch, pclient) {
       success_queries += 1
     } else {
       error_queries += 1
