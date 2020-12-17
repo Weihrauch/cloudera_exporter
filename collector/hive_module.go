@@ -55,10 +55,6 @@ var (
   HIVE_API_DRIVER_EXECUTE_RATE                         ="SELECT LAST(hive_api_driver_execute_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_DRIVER_RUN_AVG                              ="SELECT LAST(hive_api_driver_run_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_DRIVER_RUN_RATE                             ="SELECT LAST(hive_api_driver_run_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_ALL_TABLES_AVG                          ="SELECT LAST(hive_api_get_all_tables_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_ALL_TABLES_RATE                         ="SELECT LAST(hive_api_get_all_tables_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_CONFIG_VALUE_AVG                        ="SELECT LAST(hive_api_get_config_value_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_CONFIG_VALUE_RATE                       ="SELECT LAST(hive_api_get_config_value_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_DATABASE_AVG                            ="SELECT LAST(hive_api_get_database_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_DATABASE_RATE                           ="SELECT LAST(hive_api_get_database_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_DATABASES_AVG                           ="SELECT LAST(hive_api_get_databases_avg) WHERE serviceType=\"HIVE\""
@@ -121,12 +117,6 @@ var (
   HIVE_COMPLETED_OPERATION_FINISHED_RATE               ="SELECT LAST(hive_completed_operation_finished_rate) WHERE serviceType=\"HIVE\""
   HIVE_CPU_SYSTEM_RATE                                 ="SELECT LAST(cpu_system_rate) WHERE serviceType=\"HIVE\""
   HIVE_CPU_USER_RATE                                   ="SELECT LAST(cpu_user_rate) WHERE serviceType=\"HIVE\""
-  HIVE_CREATE_TOTAL_COUNT_DBS_RATE                     ="SELECT LAST(hive_create_total_count_dbs_rate) WHERE serviceType=\"HIVE\""
-  HIVE_CREATE_TOTAL_COUNT_PARTITIONS_RATE              ="SELECT LAST(hive_create_total_count_partitions_rate) WHERE serviceType=\"HIVE\""
-  HIVE_CREATE_TOTAL_COUNT_TABLES_RATE                  ="SELECT LAST(hive_create_total_count_tables_rate) WHERE serviceType=\"HIVE\""
-  HIVE_DELETE_TOTAL_COUNT_DBS_RATE                     ="SELECT LAST(hive_delete_total_count_dbs_rate) WHERE serviceType=\"HIVE\""
-  HIVE_DELETE_TOTAL_COUNT_PARTITIONS_RATE              ="SELECT LAST(hive_delete_total_count_partitions_rate) WHERE serviceType=\"HIVE\""
-  HIVE_DELETE_TOTAL_COUNT_TABLES_RATE                  ="SELECT LAST(hive_delete_total_count_tables_rate) WHERE serviceType=\"HIVE\""
   HIVE_EVENTS_CRITICAL_RATE                            ="SELECT LAST(events_critical_rate) WHERE serviceType=\"HIVE\""
   HIVE_EVENTS_IMPORTANT_RATE                           ="SELECT LAST(events_important_rate) WHERE serviceType=\"HIVE\""
   HIVE_EVENTS_INFORMATIONAL_RATE                       ="SELECT LAST(events_informational_rate) WHERE serviceType=\"HIVE\""
@@ -138,9 +128,6 @@ var (
   HIVE_HEALTH_DISABLED_RATE                            ="SELECT LAST(health_disabled_rate) WHERE serviceType=\"HIVE\""
   HIVE_HEALTH_GOOD_RATE                                ="SELECT LAST(health_good_rate) WHERE serviceType=\"HIVE\""
   HIVE_HEALTH_UNKNOWN_RATE                             ="SELECT LAST(health_unknown_rate) WHERE serviceType=\"HIVE\""
-  HIVE_INIT_TOTAL_COUNT_DBS                            ="SELECT LAST(hive_init_total_count_dbs) WHERE serviceType=\"HIVE\""
-  HIVE_INIT_TOTAL_COUNT_PARTITIONS                     ="SELECT LAST(hive_init_total_count_partitions) WHERE serviceType=\"HIVE\""
-  HIVE_INIT_TOTAL_COUNT_TABLES                         ="SELECT LAST(hive_init_total_count_tables) WHERE serviceType=\"HIVE\""
   HIVE_JVM_PAUSE_TIME_RATE                             ="SELECT LAST(hive_jvm_pause_time_rate) WHERE serviceType=\"HIVE\""
   HIVE_JVM_PAUSES_INFO_THRESHOLD_RATE                  ="SELECT LAST(hive_jvm_pauses_info_threshold_rate) WHERE serviceType=\"HIVE\""
   HIVE_JVM_PAUSES_WARN_THRESHOLD_RATE                  ="SELECT LAST(hive_jvm_pauses_warn_threshold_rate) WHERE serviceType=\"HIVE\""
@@ -190,10 +177,6 @@ var (
   hive_api_driver_execute_rate                          =create_hive_metric_struct("hive_api_driver_execute_rate", "Driver.execute method calls: Samples	message.units.executions per second")
   hive_api_driver_run_avg                               =create_hive_metric_struct("hive_api_driver_run_avg", "Driver.run method calls: Avg	ms")
   hive_api_driver_run_rate                              =create_hive_metric_struct("hive_api_driver_run_rate", "Driver.run method calls: Samples	message.units.executions per second")
-  hive_api_get_all_tables_avg                           =create_hive_metric_struct("hive_api_get_all_tables_avg", "get_all_tables method calls: Avg	ms")
-  hive_api_get_all_tables_rate                          =create_hive_metric_struct("hive_api_get_all_tables_rate", "get_all_tables method calls: Samples	message.units.executions per second")
-  hive_api_get_config_value_avg                         =create_hive_metric_struct("hive_api_get_config_value_avg", "get_config_value method calls: Avg	ms")
-  hive_api_get_config_value_rate                        =create_hive_metric_struct("hive_api_get_config_value_rate", "get_config_value method calls: Samples	message.units.executions per second")
   hive_api_get_database_avg                             =create_hive_metric_struct("hive_api_get_database_avg", "get_database method calls: Avg	ms")
   hive_api_get_database_rate                            =create_hive_metric_struct("hive_api_get_database_rate", "get_database method calls: Samples	message.units.executions per second")
   hive_api_get_databases_avg                            =create_hive_metric_struct("hive_api_get_databases_avg", "get_databases method calls: Avg	ms")
@@ -256,12 +239,6 @@ var (
   hive_completed_operation_finished_rate                =create_hive_metric_struct("hive_completed_operation_finished_rate", "Number of successfully finished HiveServer2 operations	operations per second")
   hive_cpu_system_rate                                  =create_hive_metric_struct("hive_cpu_system_rate", "Total System CPU	seconds per second")
   hive_cpu_user_rate                                    =create_hive_metric_struct("hive_cpu_user_rate", "Total CPU user time	seconds per second")
-  hive_create_total_count_dbs_rate                      =create_hive_metric_struct("hive_create_total_count_dbs_rate", "Number of databases created by this Hive Metastore Server since startup	databases per second")
-  hive_create_total_count_partitions_rate               =create_hive_metric_struct("hive_create_total_count_partitions_rate", "Number of partitions created by this Hive Metastore Server since startup	partitions per second")
-  hive_create_total_count_tables_rate                   =create_hive_metric_struct("hive_create_total_count_tables_rate", "Number of tables created by this Hive Metastore Server since startup	table per second")
-  hive_delete_total_count_dbs_rate                      =create_hive_metric_struct("hive_delete_total_count_dbs_rate", "Number of databases dropped by this Hive Metastore Server since startup	databases per second")
-  hive_delete_total_count_partitions_rate               =create_hive_metric_struct("hive_delete_total_count_partitions_rate", "Number of partitions dropped by this Hive Metastore Server since startup	partitions per second")
-  hive_delete_total_count_tables_rate                   =create_hive_metric_struct("hive_delete_total_count_tables_rate", "Number of tables dropped by this Hive Metastore Server since startup	table per second")
   hive_events_critical_rate                             =create_hive_metric_struct("hive_events_critical_rate", "The number of critical events.	events per second")
   hive_events_important_rate                            =create_hive_metric_struct("hive_events_important_rate", "The number of important events.	events per second")
   hive_events_informational_rate                        =create_hive_metric_struct("hive_events_informational_rate", "The number of informational events.	events per second")
@@ -273,9 +250,6 @@ var (
   hive_health_disabled_rate                             =create_hive_metric_struct("hive_health_disabled_rate", "Percentage of Time with Disabled Health	seconds per second")
   hive_health_good_rate                                 =create_hive_metric_struct("hive_health_good_rate", "Percentage of Time with Good Health	seconds per second")
   hive_health_unknown_rate                              =create_hive_metric_struct("hive_health_unknown_rate", "Percentage of Time with Unknown Health	seconds per second")
-  hive_init_total_count_dbs                             =create_hive_metric_struct("hive_init_total_count_dbs", "Number of databases at startup of this Hive Metastore Server	databases")
-  hive_init_total_count_partitions                      =create_hive_metric_struct("hive_init_total_count_partitions", "Number of partitions at startup of this Hive Metastore Server	partitions")
-  hive_init_total_count_tables                          =create_hive_metric_struct("hive_init_total_count_tables", "Number of tables at startup of this Hive Metastore Server	table")
   hive_jvm_pause_time_rate                              =create_hive_metric_struct("hive_jvm_pause_time_rate", "The amount of extra time the jvm was paused above the requested sleep time. The JVM pause monitor sleeps for 500 milliseconds and any extra time it waited above this is counted in the pause time.	ms per second")
   hive_jvm_pauses_info_threshold_rate                   =create_hive_metric_struct("hive_jvm_pauses_info_threshold_rate", "Number of JVM pauses longer than the info threshold but shorter than the warning threshold. By default the info threshold is set to 1 second. To change use this configuration key JvmPauseMonitorService.info-threshold.ms	pauses per second")
   hive_jvm_pauses_warn_threshold_rate                   =create_hive_metric_struct("hive_jvm_pauses_warn_threshold_rate", "Number of JVM pauses longer than the warning threshold. By default the warning threshold is set to 10 second. To change use this configuration key JvmPauseMonitorService.warn-threshold.ms	pauses per second")
@@ -318,10 +292,6 @@ var hive_query_variable_relationship = []relation {
   {HIVE_API_DRIVER_EXECUTE_RATE,                         *hive_api_driver_execute_rate},
   {HIVE_API_DRIVER_RUN_AVG,                              *hive_api_driver_run_avg},
   {HIVE_API_DRIVER_RUN_RATE,                             *hive_api_driver_run_rate},
-  {HIVE_API_GET_ALL_TABLES_AVG,                          *hive_api_get_all_tables_avg},
-  {HIVE_API_GET_ALL_TABLES_RATE,                         *hive_api_get_all_tables_rate},
-  {HIVE_API_GET_CONFIG_VALUE_AVG,                        *hive_api_get_config_value_avg},
-  {HIVE_API_GET_CONFIG_VALUE_RATE,                       *hive_api_get_config_value_rate},
   {HIVE_API_GET_DATABASE_AVG,                            *hive_api_get_database_avg},
   {HIVE_API_GET_DATABASE_RATE,                           *hive_api_get_database_rate},
   {HIVE_API_GET_DATABASES_AVG,                           *hive_api_get_databases_avg},
@@ -384,12 +354,6 @@ var hive_query_variable_relationship = []relation {
   {HIVE_COMPLETED_OPERATION_FINISHED_RATE,               *hive_completed_operation_finished_rate},
   {HIVE_CPU_SYSTEM_RATE,                                 *hive_cpu_system_rate},
   {HIVE_CPU_USER_RATE,                                   *hive_cpu_user_rate},
-  {HIVE_CREATE_TOTAL_COUNT_DBS_RATE,                     *hive_create_total_count_dbs_rate},
-  {HIVE_CREATE_TOTAL_COUNT_PARTITIONS_RATE,              *hive_create_total_count_partitions_rate},
-  {HIVE_CREATE_TOTAL_COUNT_TABLES_RATE,                  *hive_create_total_count_tables_rate},
-  {HIVE_DELETE_TOTAL_COUNT_DBS_RATE,                     *hive_delete_total_count_dbs_rate},
-  {HIVE_DELETE_TOTAL_COUNT_PARTITIONS_RATE,              *hive_delete_total_count_partitions_rate},
-  {HIVE_DELETE_TOTAL_COUNT_TABLES_RATE,                  *hive_delete_total_count_tables_rate},
   {HIVE_EVENTS_CRITICAL_RATE,                            *hive_events_critical_rate},
   {HIVE_EVENTS_IMPORTANT_RATE,                           *hive_events_important_rate},
   {HIVE_EVENTS_INFORMATIONAL_RATE,                       *hive_events_informational_rate},
@@ -401,9 +365,6 @@ var hive_query_variable_relationship = []relation {
   {HIVE_HEALTH_DISABLED_RATE,                            *hive_health_disabled_rate},
   {HIVE_HEALTH_GOOD_RATE,                                *hive_health_good_rate},
   {HIVE_HEALTH_UNKNOWN_RATE,                             *hive_health_unknown_rate},
-  {HIVE_INIT_TOTAL_COUNT_DBS,                            *hive_init_total_count_dbs},
-  {HIVE_INIT_TOTAL_COUNT_PARTITIONS,                     *hive_init_total_count_partitions},
-  {HIVE_INIT_TOTAL_COUNT_TABLES,                         *hive_init_total_count_tables},
   {HIVE_JVM_PAUSE_TIME_RATE,                             *hive_jvm_pause_time_rate},
   {HIVE_JVM_PAUSES_INFO_THRESHOLD_RATE,                  *hive_jvm_pauses_info_threshold_rate},
   {HIVE_JVM_PAUSES_WARN_THRESHOLD_RATE,                  *hive_jvm_pauses_warn_threshold_rate},
