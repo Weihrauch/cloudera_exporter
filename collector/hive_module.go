@@ -59,10 +59,6 @@ var (
   HIVE_API_GET_DATABASE_RATE                           ="SELECT LAST(hive_api_get_database_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_DATABASES_AVG                           ="SELECT LAST(hive_api_get_databases_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_DATABASES_RATE                          ="SELECT LAST(hive_api_get_databases_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_FUNCTION_AVG                            ="SELECT LAST(hive_api_get_function_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_FUNCTION_RATE                           ="SELECT LAST(hive_api_get_function_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_FUNCTIONS_AVG                           ="SELECT LAST(hive_api_get_functions_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_FUNCTIONS_RATE                          ="SELECT LAST(hive_api_get_functions_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_INDEX_BY_NAME_AVG                       ="SELECT LAST(hive_api_get_index_by_name_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_INDEX_BY_NAME_RATE                      ="SELECT LAST(hive_api_get_index_by_name_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_INDEX_NAMES_AVG                         ="SELECT LAST(hive_api_get_index_names_avg) WHERE serviceType=\"HIVE\""
@@ -72,19 +68,9 @@ var (
   HIVE_API_GET_MULTI_TABLE_AVG                         ="SELECT LAST(hive_api_get_multi_table_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_MULTI_TABLE_RATE                        ="SELECT LAST(hive_api_get_multi_table_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_TABLE_AVG                               ="SELECT LAST(hive_api_get_table_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_TABLE_NAMES_BY_FILTER_AVG               ="SELECT LAST(hive_api_get_table_names_by_filter_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_GET_TABLE_NAMES_BY_FILTER_RATE              ="SELECT LAST(hive_api_get_table_names_by_filter_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_TABLE_RATE                              ="SELECT LAST(hive_api_get_table_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_TABLES_AVG                              ="SELECT LAST(hive_api_get_tables_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_GET_TABLES_RATE                             ="SELECT LAST(hive_api_get_tables_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_GETINPUTSUMMARY_AVG                         ="SELECT LAST(hive_api_getinputsummary_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_GETINPUTSUMMARY_RATE                        ="SELECT LAST(hive_api_getinputsummary_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_GETSPLITS_AVG                               ="SELECT LAST(hive_api_getsplits_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_GETSPLITS_RATE                              ="SELECT LAST(hive_api_getsplits_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_MARKPARTITIONFOREVENT_AVG                   ="SELECT LAST(hive_api_markpartitionforevent_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_MARKPARTITIONFOREVENT_RATE                  ="SELECT LAST(hive_api_markpartitionforevent_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_OPERATION_INITIALIZED_AVG                   ="SELECT LAST(hive_api_operation_initialized_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_OPERATION_INITIALIZED_RATE                  ="SELECT LAST(hive_api_operation_initialized_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_OPERATION_PENDING_AVG                       ="SELECT LAST(hive_api_operation_pending_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_OPERATION_PENDING_RATE                      ="SELECT LAST(hive_api_operation_pending_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_OPERATION_RUNNING_AVG                       ="SELECT LAST(hive_api_operation_running_avg) WHERE serviceType=\"HIVE\""
@@ -97,8 +83,6 @@ var (
   HIVE_API_RELEASELOCKS_RATE                           ="SELECT LAST(hive_api_releaselocks_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_RUNTASKS_AVG                                ="SELECT LAST(hive_api_runtasks_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_RUNTASKS_RATE                               ="SELECT LAST(hive_api_runtasks_rate) WHERE serviceType=\"HIVE\""
-  HIVE_API_SERIALIZEPLAN_AVG                           ="SELECT LAST(hive_api_serializeplan_avg) WHERE serviceType=\"HIVE\""
-  HIVE_API_SERIALIZEPLAN_RATE                          ="SELECT LAST(hive_api_serializeplan_rate) WHERE serviceType=\"HIVE\""
   HIVE_API_TIMETOSUBMIT_AVG                            ="SELECT LAST(hive_api_timetosubmit_avg) WHERE serviceType=\"HIVE\""
   HIVE_API_TIMETOSUBMIT_RATE                           ="SELECT LAST(hive_api_timetosubmit_rate) WHERE serviceType=\"HIVE\""
   HIVE_CANARY_DURATION                                 ="SELECT LAST(canary_duration) WHERE serviceType=\"HIVE\""
@@ -111,10 +95,6 @@ var (
   HIVE_CGROUP_READ_IOS_RATE                            ="SELECT LAST(cgroup_read_ios_rate) WHERE serviceType=\"HIVE\""
   HIVE_CGROUP_WRITE_BYTES_RATE                         ="SELECT LAST(cgroup_write_bytes_rate) WHERE serviceType=\"HIVE\""
   HIVE_CGROUP_WRITE_IOS_RATE                           ="SELECT LAST(cgroup_write_ios_rate) WHERE serviceType=\"HIVE\""
-  HIVE_COMPLETED_OPERATION_CANCELED_RATE               ="SELECT LAST(hive_completed_operation_canceled_rate) WHERE serviceType=\"HIVE\""
-  HIVE_COMPLETED_OPERATION_CLOSED_RATE                 ="SELECT LAST(hive_completed_operation_closed_rate) WHERE serviceType=\"HIVE\""
-  HIVE_COMPLETED_OPERATION_ERROR_RATE                  ="SELECT LAST(hive_completed_operation_error_rate) WHERE serviceType=\"HIVE\""
-  HIVE_COMPLETED_OPERATION_FINISHED_RATE               ="SELECT LAST(hive_completed_operation_finished_rate) WHERE serviceType=\"HIVE\""
   HIVE_CPU_SYSTEM_RATE                                 ="SELECT LAST(cpu_system_rate) WHERE serviceType=\"HIVE\""
   HIVE_CPU_USER_RATE                                   ="SELECT LAST(cpu_user_rate) WHERE serviceType=\"HIVE\""
   HIVE_EVENTS_CRITICAL_RATE                            ="SELECT LAST(events_critical_rate) WHERE serviceType=\"HIVE\""
@@ -181,10 +161,6 @@ var (
   hive_api_get_database_rate                            =create_hive_metric_struct("hive_api_get_database_rate", "get_database method calls: Samples	message.units.executions per second")
   hive_api_get_databases_avg                            =create_hive_metric_struct("hive_api_get_databases_avg", "get_databases method calls: Avg	ms")
   hive_api_get_databases_rate                           =create_hive_metric_struct("hive_api_get_databases_rate", "get_databases method calls: Samples	message.units.executions per second")
-  hive_api_get_function_avg                             =create_hive_metric_struct("hive_api_get_function_avg", "get_function method calls: Avg	ms")
-  hive_api_get_function_rate                            =create_hive_metric_struct("hive_api_get_function_rate", "get_function method calls: Samples	message.units.executions per second")
-  hive_api_get_functions_avg                            =create_hive_metric_struct("hive_api_get_functions_avg", "get_functions method calls: Avg	ms")
-  hive_api_get_functions_rate                           =create_hive_metric_struct("hive_api_get_functions_rate", "get_functions method calls: Samples	message.units.executions per second")
   hive_api_get_index_by_name_avg                        =create_hive_metric_struct("hive_api_get_index_by_name_avg", "get_index_by_name method calls: Avg	ms")
   hive_api_get_index_by_name_rate                       =create_hive_metric_struct("hive_api_get_index_by_name_rate", "get_index_by_name method calls: Samples	message.units.executions per second")
   hive_api_get_index_names_avg                          =create_hive_metric_struct("hive_api_get_index_names_avg", "get_index_names method calls: Avg	ms")
@@ -194,19 +170,9 @@ var (
   hive_api_get_multi_table_avg                          =create_hive_metric_struct("hive_api_get_multi_table_avg", "get_multi_table method calls: Avg	ms")
   hive_api_get_multi_table_rate                         =create_hive_metric_struct("hive_api_get_multi_table_rate", "get_multi_table method calls: Samples	message.units.executions per second")
   hive_api_get_table_avg                                =create_hive_metric_struct("hive_api_get_table_avg", "get_table method calls: Avg	ms")
-  hive_api_get_table_names_by_filter_avg                =create_hive_metric_struct("hive_api_get_table_names_by_filter_avg", "get_table_names_by_filter method calls: Avg	ms")
-  hive_api_get_table_names_by_filter_rate               =create_hive_metric_struct("hive_api_get_table_names_by_filter_rate", "get_table_names_by_filter method calls: Samples	message.units.executions per second")
   hive_api_get_table_rate                               =create_hive_metric_struct("hive_api_get_table_rate", "get_table method calls: Samples	message.units.executions per second")
   hive_api_get_tables_avg                               =create_hive_metric_struct("hive_api_get_tables_avg", "get_tables method calls: Avg	ms")
   hive_api_get_tables_rate                              =create_hive_metric_struct("hive_api_get_tables_rate", "get_tables method calls: Samples	message.units.executions per second")
-  hive_api_getinputsummary_avg                          =create_hive_metric_struct("hive_api_getinputsummary_avg", "getInputSummary method calls: Avg	ms")
-  hive_api_getinputsummary_rate                         =create_hive_metric_struct("hive_api_getinputsummary_rate", "getInputSummary method calls: Samples	message.units.executions per second")
-  hive_api_getsplits_avg                                =create_hive_metric_struct("hive_api_getsplits_avg", "getSplits method calls: Avg	ms")
-  hive_api_getsplits_rate                               =create_hive_metric_struct("hive_api_getsplits_rate", "getSplits method calls: Samples	message.units.executions per second")
-  hive_api_markpartitionforevent_avg                    =create_hive_metric_struct("hive_api_markpartitionforevent_avg", "markPartitionForEvent method calls: Avg	ms")
-  hive_api_markpartitionforevent_rate                   =create_hive_metric_struct("hive_api_markpartitionforevent_rate", "markPartitionForEvent method calls: Samples	message.units.executions per second")
-  hive_api_operation_initialized_avg                    =create_hive_metric_struct("hive_api_operation_initialized_avg", "HiveServer2 operations in INITIALIZED state: Avg	ms")
-  hive_api_operation_initialized_rate                   =create_hive_metric_struct("hive_api_operation_initialized_rate", "HiveServer2 operations in INITIALIZED state: Samples	operations per second")
   hive_api_operation_pending_avg                        =create_hive_metric_struct("hive_api_operation_pending_avg", "HiveServer2 operations in PENDING state: Avg	ms")
   hive_api_operation_pending_rate                       =create_hive_metric_struct("hive_api_operation_pending_rate", "HiveServer2 operations in PENDING state: Samples	operations per second")
   hive_api_operation_running_avg                        =create_hive_metric_struct("hive_api_operation_running_avg", "HiveServer2 operations in RUNNING state: Avg	ms")
@@ -219,8 +185,6 @@ var (
   hive_api_releaselocks_rate                            =create_hive_metric_struct("hive_api_releaselocks_rate", "releaseLocks method calls: Samples	message.units.executions per second")
   hive_api_runtasks_avg                                 =create_hive_metric_struct("hive_api_runtasks_avg", "runTasks method calls: Avg	ms")
   hive_api_runtasks_rate                                =create_hive_metric_struct("hive_api_runtasks_rate", "runTasks method calls: Samples	message.units.executions per second")
-  hive_api_serializeplan_avg                            =create_hive_metric_struct("hive_api_serializeplan_avg", "serializePlan method calls: Avg	ms")
-  hive_api_serializeplan_rate                           =create_hive_metric_struct("hive_api_serializeplan_rate", "serializePlan method calls: Samples	message.units.executions per second")
   hive_api_timetosubmit_avg                             =create_hive_metric_struct("hive_api_timetosubmit_avg", "TimeToSubmit method calls: Avg	ms")
   hive_api_timetosubmit_rate                            =create_hive_metric_struct("hive_api_timetosubmit_rate", "TimeToSubmit method calls: Samples	message.units.executions per second")
   hive_canary_duration                                  =create_hive_metric_struct("hive_canary_duration", "Duration of the last or currently running canary job	ms")
@@ -233,10 +197,6 @@ var (
   hive_cgroup_read_ios_rate                             =create_hive_metric_struct("hive_cgroup_read_ios_rate", "Number of read I/O operations from all disks by the role's cgroup	ios per second")
   hive_cgroup_write_bytes_rate                          =create_hive_metric_struct("hive_cgroup_write_bytes_rate", "Bytes written to all disks by the role's cgroup	bytes per second")
   hive_cgroup_write_ios_rate                            =create_hive_metric_struct("hive_cgroup_write_ios_rate", "Number of write I/O operations to all disks by the role's cgroup	ios per second")
-  hive_completed_operation_canceled_rate                =create_hive_metric_struct("hive_completed_operation_canceled_rate", "Number of cancelled HiveServer2 operations	operations per second")
-  hive_completed_operation_closed_rate                  =create_hive_metric_struct("hive_completed_operation_closed_rate", "Number of HiveServer2 operations that have been closed	operations per second")
-  hive_completed_operation_error_rate                   =create_hive_metric_struct("hive_completed_operation_error_rate", "Number of HiveServer2 operations finished in error	operations per second")
-  hive_completed_operation_finished_rate                =create_hive_metric_struct("hive_completed_operation_finished_rate", "Number of successfully finished HiveServer2 operations	operations per second")
   hive_cpu_system_rate                                  =create_hive_metric_struct("hive_cpu_system_rate", "Total System CPU	seconds per second")
   hive_cpu_user_rate                                    =create_hive_metric_struct("hive_cpu_user_rate", "Total CPU user time	seconds per second")
   hive_events_critical_rate                             =create_hive_metric_struct("hive_events_critical_rate", "The number of critical events.	events per second")
@@ -296,10 +256,6 @@ var hive_query_variable_relationship = []relation {
   {HIVE_API_GET_DATABASE_RATE,                           *hive_api_get_database_rate},
   {HIVE_API_GET_DATABASES_AVG,                           *hive_api_get_databases_avg},
   {HIVE_API_GET_DATABASES_RATE,                          *hive_api_get_databases_rate},
-  {HIVE_API_GET_FUNCTION_AVG,                            *hive_api_get_function_avg},
-  {HIVE_API_GET_FUNCTION_RATE,                           *hive_api_get_function_rate},
-  {HIVE_API_GET_FUNCTIONS_AVG,                           *hive_api_get_functions_avg},
-  {HIVE_API_GET_FUNCTIONS_RATE,                          *hive_api_get_functions_rate},
   {HIVE_API_GET_INDEX_BY_NAME_AVG,                       *hive_api_get_index_by_name_avg},
   {HIVE_API_GET_INDEX_BY_NAME_RATE,                      *hive_api_get_index_by_name_rate},
   {HIVE_API_GET_INDEX_NAMES_AVG,                         *hive_api_get_index_names_avg},
@@ -309,19 +265,9 @@ var hive_query_variable_relationship = []relation {
   {HIVE_API_GET_MULTI_TABLE_AVG,                         *hive_api_get_multi_table_avg},
   {HIVE_API_GET_MULTI_TABLE_RATE,                        *hive_api_get_multi_table_rate},
   {HIVE_API_GET_TABLE_AVG,                               *hive_api_get_table_avg},
-  {HIVE_API_GET_TABLE_NAMES_BY_FILTER_AVG,               *hive_api_get_table_names_by_filter_avg},
-  {HIVE_API_GET_TABLE_NAMES_BY_FILTER_RATE,              *hive_api_get_table_names_by_filter_rate},
   {HIVE_API_GET_TABLE_RATE,                              *hive_api_get_table_rate},
   {HIVE_API_GET_TABLES_AVG,                              *hive_api_get_tables_avg},
   {HIVE_API_GET_TABLES_RATE,                             *hive_api_get_tables_rate},
-  {HIVE_API_GETINPUTSUMMARY_AVG,                         *hive_api_getinputsummary_avg},
-  {HIVE_API_GETINPUTSUMMARY_RATE,                        *hive_api_getinputsummary_rate},
-  {HIVE_API_GETSPLITS_AVG,                               *hive_api_getsplits_avg},
-  {HIVE_API_GETSPLITS_RATE,                              *hive_api_getsplits_rate},
-  {HIVE_API_MARKPARTITIONFOREVENT_AVG,                   *hive_api_markpartitionforevent_avg},
-  {HIVE_API_MARKPARTITIONFOREVENT_RATE,                  *hive_api_markpartitionforevent_rate},
-  {HIVE_API_OPERATION_INITIALIZED_AVG,                   *hive_api_operation_initialized_avg},
-  {HIVE_API_OPERATION_INITIALIZED_RATE,                  *hive_api_operation_initialized_rate},
   {HIVE_API_OPERATION_PENDING_AVG,                       *hive_api_operation_pending_avg},
   {HIVE_API_OPERATION_PENDING_RATE,                      *hive_api_operation_pending_rate},
   {HIVE_API_OPERATION_RUNNING_AVG,                       *hive_api_operation_running_avg},
@@ -334,8 +280,6 @@ var hive_query_variable_relationship = []relation {
   {HIVE_API_RELEASELOCKS_RATE,                           *hive_api_releaselocks_rate},
   {HIVE_API_RUNTASKS_AVG,                                *hive_api_runtasks_avg},
   {HIVE_API_RUNTASKS_RATE,                               *hive_api_runtasks_rate},
-  {HIVE_API_SERIALIZEPLAN_AVG,                           *hive_api_serializeplan_avg},
-  {HIVE_API_SERIALIZEPLAN_RATE,                          *hive_api_serializeplan_rate},
   {HIVE_API_TIMETOSUBMIT_AVG,                            *hive_api_timetosubmit_avg},
   {HIVE_API_TIMETOSUBMIT_RATE,                           *hive_api_timetosubmit_rate},
   {HIVE_CANARY_DURATION,                                 *hive_canary_duration},
@@ -348,10 +292,6 @@ var hive_query_variable_relationship = []relation {
   {HIVE_CGROUP_READ_IOS_RATE,                            *hive_cgroup_read_ios_rate},
   {HIVE_CGROUP_WRITE_BYTES_RATE,                         *hive_cgroup_write_bytes_rate},
   {HIVE_CGROUP_WRITE_IOS_RATE,                           *hive_cgroup_write_ios_rate},
-  {HIVE_COMPLETED_OPERATION_CANCELED_RATE,               *hive_completed_operation_canceled_rate},
-  {HIVE_COMPLETED_OPERATION_CLOSED_RATE,                 *hive_completed_operation_closed_rate},
-  {HIVE_COMPLETED_OPERATION_ERROR_RATE,                  *hive_completed_operation_error_rate},
-  {HIVE_COMPLETED_OPERATION_FINISHED_RATE,               *hive_completed_operation_finished_rate},
   {HIVE_CPU_SYSTEM_RATE,                                 *hive_cpu_system_rate},
   {HIVE_CPU_USER_RATE,                                   *hive_cpu_user_rate},
   {HIVE_EVENTS_CRITICAL_RATE,                            *hive_events_critical_rate},
@@ -400,11 +340,9 @@ var hive_query_variable_relationship = []relation {
 
 
 /* ======================================================================
- * Functions
  * ====================================================================== */
 // Create and returns a prometheus descriptor for a hive metric. 
 // The "metric_name" parameter its mandatory
-// If the "description" parameter is empty, the function assings it with the
 // value of the name of the metric in uppercase and separated by spaces
 func create_hive_metric_struct(metric_name string, description string) *prometheus.Desc {
   // Correct "description" parameter if is empty
@@ -422,7 +360,6 @@ func create_hive_metric_struct(metric_name string, description string) *promethe
 }
 
 
-// Generic function to extract de metadata associated with the query value
 // Only for HIVE metric type
 func create_hive_metric (ctx context.Context, config Collector_connection_data, query string, metric_struct prometheus.Desc, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
   // Make the query
@@ -480,7 +417,6 @@ func (ScrapeHIVE) Version() float64 {
   return 1.0
 }
 
-// Scrape generic function. Override for host module.
 func (ScrapeHIVE) Scrape (ctx context.Context, config *Collector_connection_data, ch chan<- prometheus.Metric) error {
   log.Debug_msg("Executing HIVE Metrics Scraper")
 
