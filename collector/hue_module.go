@@ -68,89 +68,41 @@ var (
   HUE_HEALTH_DISABLED_RATE                            ="SELECT LAST(health_disabled_rate) WHERE serviceType=\"HUE\""
   HUE_HEALTH_GOOD_RATE                                ="SELECT LAST(health_good_rate) WHERE serviceType=\"HUE\""
   HUE_HEALTH_UNKNOWN_RATE                             ="SELECT LAST(health_unknown_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_LDAP_AUTH_TIME_15M_RATE                ="SELECT LAST(hue_auth_ldap_auth_time_15m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_LDAP_AUTH_TIME_1M_RATE                 ="SELECT LAST(hue_auth_ldap_auth_time_1m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_LDAP_AUTH_TIME_5M_RATE                 ="SELECT LAST(hue_auth_ldap_auth_time_5m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_LDAP_AUTH_TIME_75_PERCENTILE           ="SELECT LAST(hue_auth_ldap_auth_time_75_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_LDAP_AUTH_TIME_95_PERCENTILE           ="SELECT LAST(hue_auth_ldap_auth_time_95_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_LDAP_AUTH_TIME_999_PERCENTILE          ="SELECT LAST(hue_auth_ldap_auth_time_999_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_LDAP_AUTH_TIME_99_PERCENTILE           ="SELECT LAST(hue_auth_ldap_auth_time_99_percentile) WHERE serviceType=\"HUE\""
   HUE_AUTH_LDAP_AUTH_TIME_AVG                     ="SELECT LAST(hue_auth_ldap_auth_time_avg) WHERE serviceType=\"HUE\""
   HUE_AUTH_LDAP_AUTH_TIME_MAX                     ="SELECT LAST(hue_auth_ldap_auth_time_max) WHERE serviceType=\"HUE\""
   HUE_AUTH_LDAP_AUTH_TIME_MEDIAN                  ="SELECT LAST(hue_auth_ldap_auth_time_median) WHERE serviceType=\"HUE\""
   HUE_AUTH_LDAP_AUTH_TIME_MIN                     ="SELECT LAST(hue_auth_ldap_auth_time_min) WHERE serviceType=\"HUE\""
   HUE_AUTH_LDAP_AUTH_TIME_RATE                    ="SELECT LAST(hue_auth_ldap_auth_time_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_LDAP_AUTH_TIME_STD_DEV                 ="SELECT LAST(hue_auth_ldap_auth_time_std_dev) WHERE serviceType=\"HUE\""
   HUE_AUTH_LDAP_AUTH_TIME_SUM_RATE                ="SELECT LAST(hue_auth_ldap_auth_time_sum_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OAUTH_AUTH_TIME_15M_RATE               ="SELECT LAST(hue_auth_oauth_auth_time_15m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OAUTH_AUTH_TIME_1M_RATE                ="SELECT LAST(hue_auth_oauth_auth_time_1m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OAUTH_AUTH_TIME_5M_RATE                ="SELECT LAST(hue_auth_oauth_auth_time_5m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OAUTH_AUTH_TIME_75_PERCENTILE          ="SELECT LAST(hue_auth_oauth_auth_time_75_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OAUTH_AUTH_TIME_95_PERCENTILE          ="SELECT LAST(hue_auth_oauth_auth_time_95_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OAUTH_AUTH_TIME_999_PERCENTILE         ="SELECT LAST(hue_auth_oauth_auth_time_999_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OAUTH_AUTH_TIME_99_PERCENTILE          ="SELECT LAST(hue_auth_oauth_auth_time_99_percentile) WHERE serviceType=\"HUE\""
   HUE_AUTH_OAUTH_AUTH_TIME_AVG                    ="SELECT LAST(hue_auth_oauth_auth_time_avg) WHERE serviceType=\"HUE\""
   HUE_AUTH_OAUTH_AUTH_TIME_MAX                    ="SELECT LAST(hue_auth_oauth_auth_time_max) WHERE serviceType=\"HUE\""
   HUE_AUTH_OAUTH_AUTH_TIME_MEDIAN                 ="SELECT LAST(hue_auth_oauth_auth_time_median) WHERE serviceType=\"HUE\""
   HUE_AUTH_OAUTH_AUTH_TIME_MIN                    ="SELECT LAST(hue_auth_oauth_auth_time_min) WHERE serviceType=\"HUE\""
   HUE_AUTH_OAUTH_AUTH_TIME_RATE                   ="SELECT LAST(hue_auth_oauth_auth_time_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OAUTH_AUTH_TIME_STD_DEV                ="SELECT LAST(hue_auth_oauth_auth_time_std_dev) WHERE serviceType=\"HUE\""
   HUE_AUTH_OAUTH_AUTH_TIME_SUM_RATE               ="SELECT LAST(hue_auth_oauth_auth_time_sum_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OPENID_AUTH_TIME_15M_RATE              ="SELECT LAST(hue_auth_openid_auth_time_15m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OPENID_AUTH_TIME_1M_RATE               ="SELECT LAST(hue_auth_openid_auth_time_1m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OPENID_AUTH_TIME_5M_RATE               ="SELECT LAST(hue_auth_openid_auth_time_5m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OPENID_AUTH_TIME_75_PERCENTILE         ="SELECT LAST(hue_auth_openid_auth_time_75_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OPENID_AUTH_TIME_95_PERCENTILE         ="SELECT LAST(hue_auth_openid_auth_time_95_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OPENID_AUTH_TIME_999_PERCENTILE        ="SELECT LAST(hue_auth_openid_auth_time_999_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OPENID_AUTH_TIME_99_PERCENTILE         ="SELECT LAST(hue_auth_openid_auth_time_99_percentile) WHERE serviceType=\"HUE\""
   HUE_AUTH_OPENID_AUTH_TIME_AVG                   ="SELECT LAST(hue_auth_openid_auth_time_avg) WHERE serviceType=\"HUE\""
   HUE_AUTH_OPENID_AUTH_TIME_MAX                   ="SELECT LAST(hue_auth_openid_auth_time_max) WHERE serviceType=\"HUE\""
   HUE_AUTH_OPENID_AUTH_TIME_MEDIAN                ="SELECT LAST(hue_auth_openid_auth_time_median) WHERE serviceType=\"HUE\""
   HUE_AUTH_OPENID_AUTH_TIME_MIN                   ="SELECT LAST(hue_auth_openid_auth_time_min) WHERE serviceType=\"HUE\""
   HUE_AUTH_OPENID_AUTH_TIME_RATE                  ="SELECT LAST(hue_auth_openid_auth_time_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_OPENID_AUTH_TIME_STD_DEV               ="SELECT LAST(hue_auth_openid_auth_time_std_dev) WHERE serviceType=\"HUE\""
   HUE_AUTH_OPENID_AUTH_TIME_SUM_RATE              ="SELECT LAST(hue_auth_openid_auth_time_sum_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_PAM_AUTH_TIME_15M_RATE                 ="SELECT LAST(hue_auth_pam_auth_time_15m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_PAM_AUTH_TIME_1M_RATE                  ="SELECT LAST(hue_auth_pam_auth_time_1m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_PAM_AUTH_TIME_5M_RATE                  ="SELECT LAST(hue_auth_pam_auth_time_5m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_PAM_AUTH_TIME_75_PERCENTILE            ="SELECT LAST(hue_auth_pam_auth_time_75_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_PAM_AUTH_TIME_95_PERCENTILE            ="SELECT LAST(hue_auth_pam_auth_time_95_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_PAM_AUTH_TIME_999_PERCENTILE           ="SELECT LAST(hue_auth_pam_auth_time_999_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_PAM_AUTH_TIME_99_PERCENTILE            ="SELECT LAST(hue_auth_pam_auth_time_99_percentile) WHERE serviceType=\"HUE\""
   HUE_AUTH_PAM_AUTH_TIME_AVG                      ="SELECT LAST(hue_auth_pam_auth_time_avg) WHERE serviceType=\"HUE\""
   HUE_AUTH_PAM_AUTH_TIME_MAX                      ="SELECT LAST(hue_auth_pam_auth_time_max) WHERE serviceType=\"HUE\""
   HUE_AUTH_PAM_AUTH_TIME_MEDIAN                   ="SELECT LAST(hue_auth_pam_auth_time_median) WHERE serviceType=\"HUE\""
   HUE_AUTH_PAM_AUTH_TIME_MIN                      ="SELECT LAST(hue_auth_pam_auth_time_min) WHERE serviceType=\"HUE\""
   HUE_AUTH_PAM_AUTH_TIME_RATE                     ="SELECT LAST(hue_auth_pam_auth_time_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_PAM_AUTH_TIME_STD_DEV                  ="SELECT LAST(hue_auth_pam_auth_time_std_dev) WHERE serviceType=\"HUE\""
   HUE_AUTH_PAM_AUTH_TIME_SUM_RATE                 ="SELECT LAST(hue_auth_pam_auth_time_sum_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SAML2_AUTH_TIME_15M_RATE               ="SELECT LAST(hue_auth_saml2_auth_time_15m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SAML2_AUTH_TIME_1M_RATE                ="SELECT LAST(hue_auth_saml2_auth_time_1m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SAML2_AUTH_TIME_5M_RATE                ="SELECT LAST(hue_auth_saml2_auth_time_5m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SAML2_AUTH_TIME_75_PERCENTILE          ="SELECT LAST(hue_auth_saml2_auth_time_75_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SAML2_AUTH_TIME_95_PERCENTILE          ="SELECT LAST(hue_auth_saml2_auth_time_95_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SAML2_AUTH_TIME_999_PERCENTILE         ="SELECT LAST(hue_auth_saml2_auth_time_999_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SAML2_AUTH_TIME_99_PERCENTILE          ="SELECT LAST(hue_auth_saml2_auth_time_99_percentile) WHERE serviceType=\"HUE\""
   HUE_AUTH_SAML2_AUTH_TIME_AVG                    ="SELECT LAST(hue_auth_saml2_auth_time_avg) WHERE serviceType=\"HUE\""
   HUE_AUTH_SAML2_AUTH_TIME_MAX                    ="SELECT LAST(hue_auth_saml2_auth_time_max) WHERE serviceType=\"HUE\""
   HUE_AUTH_SAML2_AUTH_TIME_MEDIAN                 ="SELECT LAST(hue_auth_saml2_auth_time_median) WHERE serviceType=\"HUE\""
   HUE_AUTH_SAML2_AUTH_TIME_MIN                    ="SELECT LAST(hue_auth_saml2_auth_time_min) WHERE serviceType=\"HUE\""
   HUE_AUTH_SAML2_AUTH_TIME_RATE                   ="SELECT LAST(hue_auth_saml2_auth_time_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SAML2_AUTH_TIME_STD_DEV                ="SELECT LAST(hue_auth_saml2_auth_time_std_dev) WHERE serviceType=\"HUE\""
   HUE_AUTH_SAML2_AUTH_TIME_SUM_RATE               ="SELECT LAST(hue_auth_saml2_auth_time_sum_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SPNEGO_AUTH_TIME_15M_RATE              ="SELECT LAST(hue_auth_spnego_auth_time_15m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SPNEGO_AUTH_TIME_1M_RATE               ="SELECT LAST(hue_auth_spnego_auth_time_1m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SPNEGO_AUTH_TIME_5M_RATE               ="SELECT LAST(hue_auth_spnego_auth_time_5m_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SPNEGO_AUTH_TIME_75_PERCENTILE         ="SELECT LAST(hue_auth_spnego_auth_time_75_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SPNEGO_AUTH_TIME_95_PERCENTILE         ="SELECT LAST(hue_auth_spnego_auth_time_95_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SPNEGO_AUTH_TIME_999_PERCENTILE        ="SELECT LAST(hue_auth_spnego_auth_time_999_percentile) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SPNEGO_AUTH_TIME_99_PERCENTILE         ="SELECT LAST(hue_auth_spnego_auth_time_99_percentile) WHERE serviceType=\"HUE\""
   HUE_AUTH_SPNEGO_AUTH_TIME_AVG                   ="SELECT LAST(hue_auth_spnego_auth_time_avg) WHERE serviceType=\"HUE\""
   HUE_AUTH_SPNEGO_AUTH_TIME_MAX                   ="SELECT LAST(hue_auth_spnego_auth_time_max) WHERE serviceType=\"HUE\""
   HUE_AUTH_SPNEGO_AUTH_TIME_MEDIAN                ="SELECT LAST(hue_auth_spnego_auth_time_median) WHERE serviceType=\"HUE\""
   HUE_AUTH_SPNEGO_AUTH_TIME_MIN                   ="SELECT LAST(hue_auth_spnego_auth_time_min) WHERE serviceType=\"HUE\""
   HUE_AUTH_SPNEGO_AUTH_TIME_RATE                  ="SELECT LAST(hue_auth_spnego_auth_time_rate) WHERE serviceType=\"HUE\""
-  HUE_AUTH_SPNEGO_AUTH_TIME_STD_DEV               ="SELECT LAST(hue_auth_spnego_auth_time_std_dev) WHERE serviceType=\"HUE\""
   HUE_AUTH_SPNEGO_AUTH_TIME_SUM_RATE              ="SELECT LAST(hue_auth_spnego_auth_time_sum_rate) WHERE serviceType=\"HUE\""
   HUE_MULTIPROCESSING_PROCESSES_DAEMON            ="SELECT LAST(hue_multiprocessing_processes_daemon) WHERE serviceType=\"HUE\""
   HUE_MULTIPROCESSING_PROCESSES_TOTAL             ="SELECT LAST(hue_multiprocessing_processes_total) WHERE serviceType=\"HUE\""
@@ -160,19 +112,11 @@ var (
   HUE_PYTHON_GC_OBJECTS                           ="SELECT LAST(hue_python_gc_objects) WHERE serviceType=\"HUE\""
   HUE_REQUESTS_ACTIVE                             ="SELECT LAST(hue_requests_active) WHERE serviceType=\"HUE\""
   HUE_REQUESTS_EXCEPTIONS_RATE                    ="SELECT LAST(hue_requests_exceptions_rate) WHERE serviceType=\"HUE\""
-  HUE_REQUESTS_RESPONSE_TIME_15M_RATE             ="SELECT LAST(hue_requests_response_time_15m_rate) WHERE serviceType=\"HUE\""
-  HUE_REQUESTS_RESPONSE_TIME_1M_RATE              ="SELECT LAST(hue_requests_response_time_1m_rate) WHERE serviceType=\"HUE\""
-  HUE_REQUESTS_RESPONSE_TIME_5M_RATE              ="SELECT LAST(hue_requests_response_time_5m_rate) WHERE serviceType=\"HUE\""
-  HUE_REQUESTS_RESPONSE_TIME_75_PERCENTILE        ="SELECT LAST(hue_requests_response_time_75_percentile) WHERE serviceType=\"HUE\""
-  HUE_REQUESTS_RESPONSE_TIME_95_PERCENTILE        ="SELECT LAST(hue_requests_response_time_95_percentile) WHERE serviceType=\"HUE\""
-  HUE_REQUESTS_RESPONSE_TIME_999_PERCENTILE       ="SELECT LAST(hue_requests_response_time_999_percentile) WHERE serviceType=\"HUE\""
-  HUE_REQUESTS_RESPONSE_TIME_99_PERCENTILE        ="SELECT LAST(hue_requests_response_time_99_percentile) WHERE serviceType=\"HUE\""
   HUE_REQUESTS_RESPONSE_TIME_AVG                  ="SELECT LAST(hue_requests_response_time_avg) WHERE serviceType=\"HUE\""
   HUE_REQUESTS_RESPONSE_TIME_MAX                  ="SELECT LAST(hue_requests_response_time_max) WHERE serviceType=\"HUE\""
   HUE_REQUESTS_RESPONSE_TIME_MEDIAN               ="SELECT LAST(hue_requests_response_time_median) WHERE serviceType=\"HUE\""
   HUE_REQUESTS_RESPONSE_TIME_MIN                  ="SELECT LAST(hue_requests_response_time_min) WHERE serviceType=\"HUE\""
   HUE_REQUESTS_RESPONSE_TIME_RATE                 ="SELECT LAST(hue_requests_response_time_rate) WHERE serviceType=\"HUE\""
-  HUE_REQUESTS_RESPONSE_TIME_STD_DEV              ="SELECT LAST(hue_requests_response_time_std_dev) WHERE serviceType=\"HUE\""
   HUE_REQUESTS_RESPONSE_TIME_SUM_RATE             ="SELECT LAST(hue_requests_response_time_sum_rate) WHERE serviceType=\"HUE\""
   HUE_THREADS_DAEMON                              ="SELECT LAST(hue_threads_daemon) WHERE serviceType=\"HUE\""
   HUE_THREADS_TOTAL                               ="SELECT LAST(hue_threads_total) WHERE serviceType=\"HUE\""
@@ -221,89 +165,41 @@ var (
   hue_health_disabled_rate                      =create_hue_metric_struct("hue_health_disabled_rate",	"Percentage of Time with Disabled Health	seconds per second")
   hue_health_good_rate                          =create_hue_metric_struct("hue_health_good_rate",	"Percentage of Time with Good Health	seconds per second")
   hue_health_unknown_rate                       =create_hue_metric_struct("hue_health_unknown_rate",	"Percentage of Time with Unknown Health	seconds per second")
-  hue_auth_ldap_auth_time_15m_rate              =create_hue_metric_struct("hue_auth_ldap_auth_time_15m_rate",	"The time spent waiting for LDAP to authenticate a user: 15-Minute Rate	message.units.authentications per second")
-  hue_auth_ldap_auth_time_1m_rate               =create_hue_metric_struct("hue_auth_ldap_auth_time_1m_rate",	"The time spent waiting for LDAP to authenticate a user: 1-Minute moving average rate.	message.units.authentications per second")
-  hue_auth_ldap_auth_time_5m_rate               =create_hue_metric_struct("hue_auth_ldap_auth_time_5m_rate",	"The time spent waiting for LDAP to authenticate a user: 5-Minute Rate	message.units.authentications per second")
-  hue_auth_ldap_auth_time_75_percentile         =create_hue_metric_struct("hue_auth_ldap_auth_time_75_percentile",	"The time spent waiting for LDAP to authenticate a user: 75th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_ldap_auth_time_95_percentile         =create_hue_metric_struct("hue_auth_ldap_auth_time_95_percentile",	"The time spent waiting for LDAP to authenticate a user: 95th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_ldap_auth_time_999_percentile        =create_hue_metric_struct("hue_auth_ldap_auth_time_999_percentile",	"The time spent waiting for LDAP to authenticate a user: 999th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_ldap_auth_time_99_percentile         =create_hue_metric_struct("hue_auth_ldap_auth_time_99_percentile",	"The time spent waiting for LDAP to authenticate a user: 99th Percentile. This is computed over the past hour.	seconds")
   hue_auth_ldap_auth_time_avg                   =create_hue_metric_struct("hue_auth_ldap_auth_time_avg",	"The time spent waiting for LDAP to authenticate a user: Average. This is computed over the lifetime of the process.	seconds")
   hue_auth_ldap_auth_time_max                   =create_hue_metric_struct("hue_auth_ldap_auth_time_max",	"The time spent waiting for LDAP to authenticate a user: Max. This is computed over the lifetime of the process.	seconds")
   hue_auth_ldap_auth_time_median                =create_hue_metric_struct("hue_auth_ldap_auth_time_median",	"The time spent waiting for LDAP to authenticate a user: 50th Percentile. This is computed over the past hour.	seconds")
   hue_auth_ldap_auth_time_min                   =create_hue_metric_struct("hue_auth_ldap_auth_time_min",	"The time spent waiting for LDAP to authenticate a user: Min. This is computed over the lifetime of the process.	seconds")
   hue_auth_ldap_auth_time_rate                  =create_hue_metric_struct("hue_auth_ldap_auth_time_rate",	"The time spent waiting for LDAP to authenticate a user: Sample Count. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_ldap_auth_time_std_dev               =create_hue_metric_struct("hue_auth_ldap_auth_time_std_dev",	"The time spent waiting for LDAP to authenticate a user: Standard Deviation. This is computed over the lifetime of the process.	seconds")
   hue_auth_ldap_auth_time_sum_rate              =create_hue_metric_struct("hue_auth_ldap_auth_time_sum_rate",	"The time spent waiting for LDAP to authenticate a user: Sample Sum. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_oauth_auth_time_15m_rate             =create_hue_metric_struct("hue_auth_oauth_auth_time_15m_rate",	"The time spent waiting for OAUTH to authenticate a user: 15-Minute Rate	message.units.authentications per second")
-  hue_auth_oauth_auth_time_1m_rate              =create_hue_metric_struct("hue_auth_oauth_auth_time_1m_rate",	"The time spent waiting for OAUTH to authenticate a user: 1-Minute moving average rate.	message.units.authentications per second")
-  hue_auth_oauth_auth_time_5m_rate              =create_hue_metric_struct("hue_auth_oauth_auth_time_5m_rate",	"The time spent waiting for OAUTH to authenticate a user: 5-Minute Rate	message.units.authentications per second")
-  hue_auth_oauth_auth_time_75_percentile        =create_hue_metric_struct("hue_auth_oauth_auth_time_75_percentile",	"The time spent waiting for OAUTH to authenticate a user: 75th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_oauth_auth_time_95_percentile        =create_hue_metric_struct("hue_auth_oauth_auth_time_95_percentile",	"The time spent waiting for OAUTH to authenticate a user: 95th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_oauth_auth_time_999_percentile       =create_hue_metric_struct("hue_auth_oauth_auth_time_999_percentile",	"The time spent waiting for OAUTH to authenticate a user: 999th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_oauth_auth_time_99_percentile        =create_hue_metric_struct("hue_auth_oauth_auth_time_99_percentile",	"The time spent waiting for OAUTH to authenticate a user: 99th Percentile. This is computed over the past hour.	seconds")
   hue_auth_oauth_auth_time_avg                  =create_hue_metric_struct("hue_auth_oauth_auth_time_avg",	"The time spent waiting for OAUTH to authenticate a user: Average. This is computed over the lifetime of the process.	seconds")
   hue_auth_oauth_auth_time_max                  =create_hue_metric_struct("hue_auth_oauth_auth_time_max",	"The time spent waiting for OAUTH to authenticate a user: Max. This is computed over the lifetime of the process.	seconds")
   hue_auth_oauth_auth_time_median               =create_hue_metric_struct("hue_auth_oauth_auth_time_median",	"The time spent waiting for OAUTH to authenticate a user: 50th Percentile. This is computed over the past hour.	seconds")
   hue_auth_oauth_auth_time_min                  =create_hue_metric_struct("hue_auth_oauth_auth_time_min",	"The time spent waiting for OAUTH to authenticate a user: Min. This is computed over the lifetime of the process.	seconds")
   hue_auth_oauth_auth_time_rate                 =create_hue_metric_struct("hue_auth_oauth_auth_time_rate",	"The time spent waiting for OAUTH to authenticate a user: Sample Count. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_oauth_auth_time_std_dev              =create_hue_metric_struct("hue_auth_oauth_auth_time_std_dev",	"The time spent waiting for OAUTH to authenticate a user: Standard Deviation. This is computed over the lifetime of the process.	seconds")
   hue_auth_oauth_auth_time_sum_rate             =create_hue_metric_struct("hue_auth_oauth_auth_time_sum_rate",	"The time spent waiting for OAUTH to authenticate a user: Sample Sum. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_openid_auth_time_15m_rate            =create_hue_metric_struct("hue_auth_openid_auth_time_15m_rate",	"The time spent waiting for OpenID to authenticate a user: 15-Minute Rate	message.units.authentications per second")
-  hue_auth_openid_auth_time_1m_rate             =create_hue_metric_struct("hue_auth_openid_auth_time_1m_rate",	"The time spent waiting for OpenID to authenticate a user: 1-Minute moving average rate.	message.units.authentications per second")
-  hue_auth_openid_auth_time_5m_rate             =create_hue_metric_struct("hue_auth_openid_auth_time_5m_rate",	"The time spent waiting for OpenID to authenticate a user: 5-Minute Rate	message.units.authentications per second")
-  hue_auth_openid_auth_time_75_percentile       =create_hue_metric_struct("hue_auth_openid_auth_time_75_percentile",	"The time spent waiting for OpenID to authenticate a user: 75th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_openid_auth_time_95_percentile       =create_hue_metric_struct("hue_auth_openid_auth_time_95_percentile",	"The time spent waiting for OpenID to authenticate a user: 95th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_openid_auth_time_999_percentile      =create_hue_metric_struct("hue_auth_openid_auth_time_999_percentile",	"The time spent waiting for OpenID to authenticate a user: 999th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_openid_auth_time_99_percentile       =create_hue_metric_struct("hue_auth_openid_auth_time_99_percentile",	"The time spent waiting for OpenID to authenticate a user: 99th Percentile. This is computed over the past hour.	seconds")
   hue_auth_openid_auth_time_avg                 =create_hue_metric_struct("hue_auth_openid_auth_time_avg",	"The time spent waiting for OpenID to authenticate a user: Average. This is computed over the lifetime of the process.	seconds")
   hue_auth_openid_auth_time_max                 =create_hue_metric_struct("hue_auth_openid_auth_time_max",	"The time spent waiting for OpenID to authenticate a user: Max. This is computed over the lifetime of the process.	seconds")
   hue_auth_openid_auth_time_median              =create_hue_metric_struct("hue_auth_openid_auth_time_median",	"The time spent waiting for OpenID to authenticate a user: 50th Percentile. This is computed over the past hour.	seconds")
   hue_auth_openid_auth_time_min                 =create_hue_metric_struct("hue_auth_openid_auth_time_min",	"The time spent waiting for OpenID to authenticate a user: Min. This is computed over the lifetime of the process.	seconds")
   hue_auth_openid_auth_time_rate                =create_hue_metric_struct("hue_auth_openid_auth_time_rate",	"The time spent waiting for OpenID to authenticate a user: Sample Count. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_openid_auth_time_std_dev             =create_hue_metric_struct("hue_auth_openid_auth_time_std_dev",	"The time spent waiting for OpenID to authenticate a user: Standard Deviation. This is computed over the lifetime of the process.	seconds")
   hue_auth_openid_auth_time_sum_rate            =create_hue_metric_struct("hue_auth_openid_auth_time_sum_rate",	"The time spent waiting for OpenID to authenticate a user: Sample Sum. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_pam_auth_time_15m_rate               =create_hue_metric_struct("hue_auth_pam_auth_time_15m_rate",	"The time spent waiting for PAM to authenticate a user: 15-Minute Rate	message.units.authentications per second")
-  hue_auth_pam_auth_time_1m_rate                =create_hue_metric_struct("hue_auth_pam_auth_time_1m_rate",	"The time spent waiting for PAM to authenticate a user: 1-Minute moving average rate.	message.units.authentications per second")
-  hue_auth_pam_auth_time_5m_rate                =create_hue_metric_struct("hue_auth_pam_auth_time_5m_rate",	"The time spent waiting for PAM to authenticate a user: 5-Minute Rate	message.units.authentications per second")
-  hue_auth_pam_auth_time_75_percentile          =create_hue_metric_struct("hue_auth_pam_auth_time_75_percentile",	"The time spent waiting for PAM to authenticate a user: 75th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_pam_auth_time_95_percentile          =create_hue_metric_struct("hue_auth_pam_auth_time_95_percentile",	"The time spent waiting for PAM to authenticate a user: 95th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_pam_auth_time_999_percentile         =create_hue_metric_struct("hue_auth_pam_auth_time_999_percentile",	"The time spent waiting for PAM to authenticate a user: 999th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_pam_auth_time_99_percentile          =create_hue_metric_struct("hue_auth_pam_auth_time_99_percentile",	"The time spent waiting for PAM to authenticate a user: 99th Percentile. This is computed over the past hour.	seconds")
   hue_auth_pam_auth_time_avg                    =create_hue_metric_struct("hue_auth_pam_auth_time_avg",	"The time spent waiting for PAM to authenticate a user: Average. This is computed over the lifetime of the process.	seconds")
   hue_auth_pam_auth_time_max                    =create_hue_metric_struct("hue_auth_pam_auth_time_max",	"The time spent waiting for PAM to authenticate a user: Max. This is computed over the lifetime of the process.	seconds")
   hue_auth_pam_auth_time_median                 =create_hue_metric_struct("hue_auth_pam_auth_time_median",	"The time spent waiting for PAM to authenticate a user: 50th Percentile. This is computed over the past hour.	seconds")
   hue_auth_pam_auth_time_min                    =create_hue_metric_struct("hue_auth_pam_auth_time_min",	"The time spent waiting for PAM to authenticate a user: Min. This is computed over the lifetime of the process.	seconds")
   hue_auth_pam_auth_time_rate                   =create_hue_metric_struct("hue_auth_pam_auth_time_rate",	"The time spent waiting for PAM to authenticate a user: Sample Count. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_pam_auth_time_std_dev                =create_hue_metric_struct("hue_auth_pam_auth_time_std_dev",	"The time spent waiting for PAM to authenticate a user: Standard Deviation. This is computed over the lifetime of the process.	seconds")
   hue_auth_pam_auth_time_sum_rate               =create_hue_metric_struct("hue_auth_pam_auth_time_sum_rate",	"The time spent waiting for PAM to authenticate a user: Sample Sum. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_saml2_auth_time_15m_rate             =create_hue_metric_struct("hue_auth_saml2_auth_time_15m_rate",	"The time spent waiting for SAML2 to authenticate a user: 15-Minute Rate	message.units.authentications per second")
-  hue_auth_saml2_auth_time_1m_rate              =create_hue_metric_struct("hue_auth_saml2_auth_time_1m_rate",	"The time spent waiting for SAML2 to authenticate a user: 1-Minute moving average rate.	message.units.authentications per second")
-  hue_auth_saml2_auth_time_5m_rate              =create_hue_metric_struct("hue_auth_saml2_auth_time_5m_rate",	"The time spent waiting for SAML2 to authenticate a user: 5-Minute Rate	message.units.authentications per second")
-  hue_auth_saml2_auth_time_75_percentile        =create_hue_metric_struct("hue_auth_saml2_auth_time_75_percentile",	"The time spent waiting for SAML2 to authenticate a user: 75th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_saml2_auth_time_95_percentile        =create_hue_metric_struct("hue_auth_saml2_auth_time_95_percentile",	"The time spent waiting for SAML2 to authenticate a user: 95th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_saml2_auth_time_999_percentile       =create_hue_metric_struct("hue_auth_saml2_auth_time_999_percentile",	"The time spent waiting for SAML2 to authenticate a user: 999th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_saml2_auth_time_99_percentile        =create_hue_metric_struct("hue_auth_saml2_auth_time_99_percentile",	"The time spent waiting for SAML2 to authenticate a user: 99th Percentile. This is computed over the past hour.	seconds")
   hue_auth_saml2_auth_time_avg                  =create_hue_metric_struct("hue_auth_saml2_auth_time_avg",	"The time spent waiting for SAML2 to authenticate a user: Average. This is computed over the lifetime of the process.	seconds")
   hue_auth_saml2_auth_time_max                  =create_hue_metric_struct("hue_auth_saml2_auth_time_max",	"The time spent waiting for SAML2 to authenticate a user: Max. This is computed over the lifetime of the process.	seconds")
   hue_auth_saml2_auth_time_median               =create_hue_metric_struct("hue_auth_saml2_auth_time_median",	"The time spent waiting for SAML2 to authenticate a user: 50th Percentile. This is computed over the past hour.	seconds")
   hue_auth_saml2_auth_time_min                  =create_hue_metric_struct("hue_auth_saml2_auth_time_min",	"The time spent waiting for SAML2 to authenticate a user: Min. This is computed over the lifetime of the process.	seconds")
   hue_auth_saml2_auth_time_rate                 =create_hue_metric_struct("hue_auth_saml2_auth_time_rate",	"The time spent waiting for SAML2 to authenticate a user: Sample Count. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_saml2_auth_time_std_dev              =create_hue_metric_struct("hue_auth_saml2_auth_time_std_dev",	"The time spent waiting for SAML2 to authenticate a user: Standard Deviation. This is computed over the lifetime of the process.	seconds")
   hue_auth_saml2_auth_time_sum_rate             =create_hue_metric_struct("hue_auth_saml2_auth_time_sum_rate",	"The time spent waiting for SAML2 to authenticate a user: Sample Sum. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_spnego_auth_time_15m_rate            =create_hue_metric_struct("hue_auth_spnego_auth_time_15m_rate",	"The time spent waiting for SPNEGO to authenticate a user: 15-Minute Rate	message.units.authentications per second")
-  hue_auth_spnego_auth_time_1m_rate             =create_hue_metric_struct("hue_auth_spnego_auth_time_1m_rate",	"The time spent waiting for SPNEGO to authenticate a user: 1-Minute moving average rate.	message.units.authentications per second")
-  hue_auth_spnego_auth_time_5m_rate             =create_hue_metric_struct("hue_auth_spnego_auth_time_5m_rate",	"The time spent waiting for SPNEGO to authenticate a user: 5-Minute Rate	message.units.authentications per second")
-  hue_auth_spnego_auth_time_75_percentile       =create_hue_metric_struct("hue_auth_spnego_auth_time_75_percentile",	"The time spent waiting for SPNEGO to authenticate a user: 75th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_spnego_auth_time_95_percentile       =create_hue_metric_struct("hue_auth_spnego_auth_time_95_percentile",	"The time spent waiting for SPNEGO to authenticate a user: 95th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_spnego_auth_time_999_percentile      =create_hue_metric_struct("hue_auth_spnego_auth_time_999_percentile",	"The time spent waiting for SPNEGO to authenticate a user: 999th Percentile. This is computed over the past hour.	seconds")
-  hue_auth_spnego_auth_time_99_percentile       =create_hue_metric_struct("hue_auth_spnego_auth_time_99_percentile",	"The time spent waiting for SPNEGO to authenticate a user: 99th Percentile. This is computed over the past hour.	seconds")
   hue_auth_spnego_auth_time_avg                 =create_hue_metric_struct("hue_auth_spnego_auth_time_avg",	"The time spent waiting for SPNEGO to authenticate a user: Average. This is computed over the lifetime of the process.	seconds")
   hue_auth_spnego_auth_time_max                 =create_hue_metric_struct("hue_auth_spnego_auth_time_max",	"The time spent waiting for SPNEGO to authenticate a user: Max. This is computed over the lifetime of the process.	seconds")
   hue_auth_spnego_auth_time_median              =create_hue_metric_struct("hue_auth_spnego_auth_time_median",	"The time spent waiting for SPNEGO to authenticate a user: 50th Percentile. This is computed over the past hour.	seconds")
   hue_auth_spnego_auth_time_min                 =create_hue_metric_struct("hue_auth_spnego_auth_time_min",	"The time spent waiting for SPNEGO to authenticate a user: Min. This is computed over the lifetime of the process.	seconds")
   hue_auth_spnego_auth_time_rate                =create_hue_metric_struct("hue_auth_spnego_auth_time_rate",	"The time spent waiting for SPNEGO to authenticate a user: Sample Count. This is computed over the lifetime of the process.	message.units.authentications per second")
-  hue_auth_spnego_auth_time_std_dev             =create_hue_metric_struct("hue_auth_spnego_auth_time_std_dev",	"The time spent waiting for SPNEGO to authenticate a user: Standard Deviation. This is computed over the lifetime of the process.	seconds")
   hue_auth_spnego_auth_time_sum_rate            =create_hue_metric_struct("hue_auth_spnego_auth_time_sum_rate",	"The time spent waiting for SPNEGO to authenticate a user: Sample Sum. This is computed over the lifetime of the process.	message.units.authentications per second")
   hue_multiprocessing_processes_daemon          =create_hue_metric_struct("hue_multiprocessing_processes_daemon",	"Number of daemon multiprocessing processes	message.units.processes")
   hue_multiprocessing_processes_total           =create_hue_metric_struct("hue_multiprocessing_processes_total",	"Number of multiprocessing processes	message.units.processes")
@@ -313,19 +209,11 @@ var (
   hue_python_gc_objects                         =create_hue_metric_struct("hue_python_gc_objects",	"Total number of objects in the Python process	message.units.objects")
   hue_requests_active                           =create_hue_metric_struct("hue_requests_active",	"Number of currently active requests	requests")
   hue_requests_exceptions_rate                  =create_hue_metric_struct("hue_requests_exceptions_rate",	"Number requests that resulted in an exception	requests per second")
-  hue_requests_response_time_15m_rate           =create_hue_metric_struct("hue_requests_response_time_15m_rate",	"Time taken to respond to requests across all Hue endpoints: 15-Minute Rate	requests per second")
-  hue_requests_response_time_1m_rate            =create_hue_metric_struct("hue_requests_response_time_1m_rate",	"Time taken to respond to requests across all Hue endpoints: 1-Minute moving average rate.	requests per second")
-  hue_requests_response_time_5m_rate            =create_hue_metric_struct("hue_requests_response_time_5m_rate",	"Time taken to respond to requests across all Hue endpoints: 5-Minute Rate	requests per second")
-  hue_requests_response_time_75_percentile      =create_hue_metric_struct("hue_requests_response_time_75_percentile",	"Time taken to respond to requests across all Hue endpoints: 75th Percentile. This is computed over the past hour.	seconds")
-  hue_requests_response_time_95_percentile      =create_hue_metric_struct("hue_requests_response_time_95_percentile",	"Time taken to respond to requests across all Hue endpoints: 95th Percentile. This is computed over the past hour.	seconds")
-  hue_requests_response_time_999_percentile     =create_hue_metric_struct("hue_requests_response_time_999_percentile",	"Time taken to respond to requests across all Hue endpoints: 999th Percentile. This is computed over the past hour.	seconds")
-  hue_requests_response_time_99_percentile      =create_hue_metric_struct("hue_requests_response_time_99_percentile",	"Time taken to respond to requests across all Hue endpoints: 99th Percentile. This is computed over the past hour.	seconds")
   hue_requests_response_time_avg                =create_hue_metric_struct("hue_requests_response_time_avg",	"Time taken to respond to requests across all Hue endpoints: Average. This is computed over the lifetime of the process.	seconds")
   hue_requests_response_time_max                =create_hue_metric_struct("hue_requests_response_time_max",	"Time taken to respond to requests across all Hue endpoints: Max. This is computed over the lifetime of the process.	seconds")
   hue_requests_response_time_median             =create_hue_metric_struct("hue_requests_response_time_median",	"Time taken to respond to requests across all Hue endpoints: 50th Percentile. This is computed over the past hour.	seconds")
   hue_requests_response_time_min                =create_hue_metric_struct("hue_requests_response_time_min",	"Time taken to respond to requests across all Hue endpoints: Min. This is computed over the lifetime of the process.	seconds")
   hue_requests_response_time_rate               =create_hue_metric_struct("hue_requests_response_time_rate",	"Time taken to respond to requests across all Hue endpoints: Sample Count. This is computed over the lifetime of the process.	requests per second")
-  hue_requests_response_time_std_dev            =create_hue_metric_struct("hue_requests_response_time_std_dev",	"Time taken to respond to requests across all Hue endpoints: Standard Deviation. This is computed over the lifetime of the process.	seconds")
   hue_requests_response_time_sum_rate           =create_hue_metric_struct("hue_requests_response_time_sum_rate",	"Time taken to respond to requests across all Hue endpoints: Sample Sum. This is computed over the lifetime of the process.	requests per second")
   hue_threads_daemon                            =create_hue_metric_struct("hue_threads_daemon",	"The number of daemon threads	threads")
   hue_threads_total                             =create_hue_metric_struct("hue_threads_total",	"The total number of threads	threads")
@@ -366,89 +254,41 @@ var hue_query_variable_relationship = []relation {
   {HUE_HEALTH_DISABLED_RATE,                      *hue_health_disabled_rate},
   {HUE_HEALTH_GOOD_RATE,                          *hue_health_good_rate},
   {HUE_HEALTH_UNKNOWN_RATE,                       *hue_health_unknown_rate},
-  {HUE_AUTH_LDAP_AUTH_TIME_15M_RATE,              *hue_auth_ldap_auth_time_15m_rate},
-  {HUE_AUTH_LDAP_AUTH_TIME_1M_RATE,               *hue_auth_ldap_auth_time_1m_rate},
-  {HUE_AUTH_LDAP_AUTH_TIME_5M_RATE,               *hue_auth_ldap_auth_time_5m_rate},
-  {HUE_AUTH_LDAP_AUTH_TIME_75_PERCENTILE,         *hue_auth_ldap_auth_time_75_percentile},
-  {HUE_AUTH_LDAP_AUTH_TIME_95_PERCENTILE,         *hue_auth_ldap_auth_time_95_percentile},
-  {HUE_AUTH_LDAP_AUTH_TIME_999_PERCENTILE,        *hue_auth_ldap_auth_time_999_percentile},
-  {HUE_AUTH_LDAP_AUTH_TIME_99_PERCENTILE,         *hue_auth_ldap_auth_time_99_percentile},
   {HUE_AUTH_LDAP_AUTH_TIME_AVG,                   *hue_auth_ldap_auth_time_avg},
   {HUE_AUTH_LDAP_AUTH_TIME_MAX,                   *hue_auth_ldap_auth_time_max},
   {HUE_AUTH_LDAP_AUTH_TIME_MEDIAN,                *hue_auth_ldap_auth_time_median},
   {HUE_AUTH_LDAP_AUTH_TIME_MIN,                   *hue_auth_ldap_auth_time_min},
   {HUE_AUTH_LDAP_AUTH_TIME_RATE,                  *hue_auth_ldap_auth_time_rate},
-  {HUE_AUTH_LDAP_AUTH_TIME_STD_DEV,               *hue_auth_ldap_auth_time_std_dev},
   {HUE_AUTH_LDAP_AUTH_TIME_SUM_RATE,              *hue_auth_ldap_auth_time_sum_rate},
-  {HUE_AUTH_OAUTH_AUTH_TIME_15M_RATE,             *hue_auth_oauth_auth_time_15m_rate},
-  {HUE_AUTH_OAUTH_AUTH_TIME_1M_RATE,              *hue_auth_oauth_auth_time_1m_rate},
-  {HUE_AUTH_OAUTH_AUTH_TIME_5M_RATE,              *hue_auth_oauth_auth_time_5m_rate},
-  {HUE_AUTH_OAUTH_AUTH_TIME_75_PERCENTILE,        *hue_auth_oauth_auth_time_75_percentile},
-  {HUE_AUTH_OAUTH_AUTH_TIME_95_PERCENTILE,        *hue_auth_oauth_auth_time_95_percentile},
-  {HUE_AUTH_OAUTH_AUTH_TIME_999_PERCENTILE,       *hue_auth_oauth_auth_time_999_percentile},
-  {HUE_AUTH_OAUTH_AUTH_TIME_99_PERCENTILE,        *hue_auth_oauth_auth_time_99_percentile},
   {HUE_AUTH_OAUTH_AUTH_TIME_AVG,                  *hue_auth_oauth_auth_time_avg},
   {HUE_AUTH_OAUTH_AUTH_TIME_MAX,                  *hue_auth_oauth_auth_time_max},
   {HUE_AUTH_OAUTH_AUTH_TIME_MEDIAN,               *hue_auth_oauth_auth_time_median},
   {HUE_AUTH_OAUTH_AUTH_TIME_MIN,                  *hue_auth_oauth_auth_time_min},
   {HUE_AUTH_OAUTH_AUTH_TIME_RATE,                 *hue_auth_oauth_auth_time_rate},
-  {HUE_AUTH_OAUTH_AUTH_TIME_STD_DEV,              *hue_auth_oauth_auth_time_std_dev},
   {HUE_AUTH_OAUTH_AUTH_TIME_SUM_RATE,             *hue_auth_oauth_auth_time_sum_rate},
-  {HUE_AUTH_OPENID_AUTH_TIME_15M_RATE,            *hue_auth_openid_auth_time_15m_rate},
-  {HUE_AUTH_OPENID_AUTH_TIME_1M_RATE,             *hue_auth_openid_auth_time_1m_rate},
-  {HUE_AUTH_OPENID_AUTH_TIME_5M_RATE,             *hue_auth_openid_auth_time_5m_rate},
-  {HUE_AUTH_OPENID_AUTH_TIME_75_PERCENTILE,       *hue_auth_openid_auth_time_75_percentile},
-  {HUE_AUTH_OPENID_AUTH_TIME_95_PERCENTILE,       *hue_auth_openid_auth_time_95_percentile},
-  {HUE_AUTH_OPENID_AUTH_TIME_999_PERCENTILE,      *hue_auth_openid_auth_time_999_percentile},
-  {HUE_AUTH_OPENID_AUTH_TIME_99_PERCENTILE,       *hue_auth_openid_auth_time_99_percentile},
   {HUE_AUTH_OPENID_AUTH_TIME_AVG,                 *hue_auth_openid_auth_time_avg},
   {HUE_AUTH_OPENID_AUTH_TIME_MAX,                 *hue_auth_openid_auth_time_max},
   {HUE_AUTH_OPENID_AUTH_TIME_MEDIAN,              *hue_auth_openid_auth_time_median},
   {HUE_AUTH_OPENID_AUTH_TIME_MIN,                 *hue_auth_openid_auth_time_min},
   {HUE_AUTH_OPENID_AUTH_TIME_RATE,                *hue_auth_openid_auth_time_rate},
-  {HUE_AUTH_OPENID_AUTH_TIME_STD_DEV,             *hue_auth_openid_auth_time_std_dev},
   {HUE_AUTH_OPENID_AUTH_TIME_SUM_RATE,            *hue_auth_openid_auth_time_sum_rate},
-  {HUE_AUTH_PAM_AUTH_TIME_15M_RATE,               *hue_auth_pam_auth_time_15m_rate},
-  {HUE_AUTH_PAM_AUTH_TIME_1M_RATE,                *hue_auth_pam_auth_time_1m_rate},
-  {HUE_AUTH_PAM_AUTH_TIME_5M_RATE,                *hue_auth_pam_auth_time_5m_rate},
-  {HUE_AUTH_PAM_AUTH_TIME_75_PERCENTILE,          *hue_auth_pam_auth_time_75_percentile},
-  {HUE_AUTH_PAM_AUTH_TIME_95_PERCENTILE,          *hue_auth_pam_auth_time_95_percentile},
-  {HUE_AUTH_PAM_AUTH_TIME_999_PERCENTILE,         *hue_auth_pam_auth_time_999_percentile},
-  {HUE_AUTH_PAM_AUTH_TIME_99_PERCENTILE,          *hue_auth_pam_auth_time_99_percentile},
   {HUE_AUTH_PAM_AUTH_TIME_AVG,                    *hue_auth_pam_auth_time_avg},
   {HUE_AUTH_PAM_AUTH_TIME_MAX,                    *hue_auth_pam_auth_time_max},
   {HUE_AUTH_PAM_AUTH_TIME_MEDIAN,                 *hue_auth_pam_auth_time_median},
   {HUE_AUTH_PAM_AUTH_TIME_MIN,                    *hue_auth_pam_auth_time_min},
   {HUE_AUTH_PAM_AUTH_TIME_RATE,                   *hue_auth_pam_auth_time_rate},
-  {HUE_AUTH_PAM_AUTH_TIME_STD_DEV,                *hue_auth_pam_auth_time_std_dev},
   {HUE_AUTH_PAM_AUTH_TIME_SUM_RATE,               *hue_auth_pam_auth_time_sum_rate},
-  {HUE_AUTH_SAML2_AUTH_TIME_15M_RATE,             *hue_auth_saml2_auth_time_15m_rate},
-  {HUE_AUTH_SAML2_AUTH_TIME_1M_RATE,              *hue_auth_saml2_auth_time_1m_rate},
-  {HUE_AUTH_SAML2_AUTH_TIME_5M_RATE,              *hue_auth_saml2_auth_time_5m_rate},
-  {HUE_AUTH_SAML2_AUTH_TIME_75_PERCENTILE,        *hue_auth_saml2_auth_time_75_percentile},
-  {HUE_AUTH_SAML2_AUTH_TIME_95_PERCENTILE,        *hue_auth_saml2_auth_time_95_percentile},
-  {HUE_AUTH_SAML2_AUTH_TIME_999_PERCENTILE,       *hue_auth_saml2_auth_time_999_percentile},
-  {HUE_AUTH_SAML2_AUTH_TIME_99_PERCENTILE,        *hue_auth_saml2_auth_time_99_percentile},
   {HUE_AUTH_SAML2_AUTH_TIME_AVG,                  *hue_auth_saml2_auth_time_avg},
   {HUE_AUTH_SAML2_AUTH_TIME_MAX,                  *hue_auth_saml2_auth_time_max},
   {HUE_AUTH_SAML2_AUTH_TIME_MEDIAN,               *hue_auth_saml2_auth_time_median},
   {HUE_AUTH_SAML2_AUTH_TIME_MIN,                  *hue_auth_saml2_auth_time_min},
   {HUE_AUTH_SAML2_AUTH_TIME_RATE,                 *hue_auth_saml2_auth_time_rate},
-  {HUE_AUTH_SAML2_AUTH_TIME_STD_DEV,              *hue_auth_saml2_auth_time_std_dev},
   {HUE_AUTH_SAML2_AUTH_TIME_SUM_RATE,             *hue_auth_saml2_auth_time_sum_rate},
-  {HUE_AUTH_SPNEGO_AUTH_TIME_15M_RATE,            *hue_auth_spnego_auth_time_15m_rate},
-  {HUE_AUTH_SPNEGO_AUTH_TIME_1M_RATE,             *hue_auth_spnego_auth_time_1m_rate},
-  {HUE_AUTH_SPNEGO_AUTH_TIME_5M_RATE,             *hue_auth_spnego_auth_time_5m_rate},
-  {HUE_AUTH_SPNEGO_AUTH_TIME_75_PERCENTILE,       *hue_auth_spnego_auth_time_75_percentile},
-  {HUE_AUTH_SPNEGO_AUTH_TIME_95_PERCENTILE,       *hue_auth_spnego_auth_time_95_percentile},
-  {HUE_AUTH_SPNEGO_AUTH_TIME_999_PERCENTILE,      *hue_auth_spnego_auth_time_999_percentile},
-  {HUE_AUTH_SPNEGO_AUTH_TIME_99_PERCENTILE,       *hue_auth_spnego_auth_time_99_percentile},
   {HUE_AUTH_SPNEGO_AUTH_TIME_AVG,                 *hue_auth_spnego_auth_time_avg},
   {HUE_AUTH_SPNEGO_AUTH_TIME_MAX,                 *hue_auth_spnego_auth_time_max},
   {HUE_AUTH_SPNEGO_AUTH_TIME_MEDIAN,              *hue_auth_spnego_auth_time_median},
   {HUE_AUTH_SPNEGO_AUTH_TIME_MIN,                 *hue_auth_spnego_auth_time_min},
   {HUE_AUTH_SPNEGO_AUTH_TIME_RATE,                *hue_auth_spnego_auth_time_rate},
-  {HUE_AUTH_SPNEGO_AUTH_TIME_STD_DEV,             *hue_auth_spnego_auth_time_std_dev},
   {HUE_AUTH_SPNEGO_AUTH_TIME_SUM_RATE,            *hue_auth_spnego_auth_time_sum_rate},
   {HUE_MULTIPROCESSING_PROCESSES_DAEMON,          *hue_multiprocessing_processes_daemon},
   {HUE_MULTIPROCESSING_PROCESSES_TOTAL,           *hue_multiprocessing_processes_total},
@@ -458,19 +298,11 @@ var hue_query_variable_relationship = []relation {
   {HUE_PYTHON_GC_OBJECTS,                         *hue_python_gc_objects},
   {HUE_REQUESTS_ACTIVE,                           *hue_requests_active},
   {HUE_REQUESTS_EXCEPTIONS_RATE,                  *hue_requests_exceptions_rate},
-  {HUE_REQUESTS_RESPONSE_TIME_15M_RATE,           *hue_requests_response_time_15m_rate},
-  {HUE_REQUESTS_RESPONSE_TIME_1M_RATE,            *hue_requests_response_time_1m_rate},
-  {HUE_REQUESTS_RESPONSE_TIME_5M_RATE,            *hue_requests_response_time_5m_rate},
-  {HUE_REQUESTS_RESPONSE_TIME_75_PERCENTILE,      *hue_requests_response_time_75_percentile},
-  {HUE_REQUESTS_RESPONSE_TIME_95_PERCENTILE,      *hue_requests_response_time_95_percentile},
-  {HUE_REQUESTS_RESPONSE_TIME_999_PERCENTILE,     *hue_requests_response_time_999_percentile},
-  {HUE_REQUESTS_RESPONSE_TIME_99_PERCENTILE,      *hue_requests_response_time_99_percentile},
   {HUE_REQUESTS_RESPONSE_TIME_AVG,                *hue_requests_response_time_avg},
   {HUE_REQUESTS_RESPONSE_TIME_MAX,                *hue_requests_response_time_max},
   {HUE_REQUESTS_RESPONSE_TIME_MEDIAN,             *hue_requests_response_time_median},
   {HUE_REQUESTS_RESPONSE_TIME_MIN,                *hue_requests_response_time_min},
   {HUE_REQUESTS_RESPONSE_TIME_RATE,               *hue_requests_response_time_rate},
-  {HUE_REQUESTS_RESPONSE_TIME_STD_DEV,            *hue_requests_response_time_std_dev},
   {HUE_REQUESTS_RESPONSE_TIME_SUM_RATE,           *hue_requests_response_time_sum_rate},
   {HUE_THREADS_DAEMON,                            *hue_threads_daemon},
   {HUE_THREADS_TOTAL,                             *hue_threads_total},
