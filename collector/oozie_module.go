@@ -246,7 +246,6 @@ OOZIE_WRITE_BYTES_RATE                                                          
     {OOZIE_MEM_RSS,                                                                                                   *oozie_mem_rss},
     {OOZIE_MEM_SWAP,                                                                                                  *oozie_mem_swap},
     {OOZIE_MEM_VIRTUAL,                                                                                               *oozie_mem_virtual},
-    {OOZIE_OOM_EXITS_RATE,                                                                                            *oozie_oom_exits_rate},
     {OOZIE_BUNDLE_ACTION_QUERY_EXECUTOR_GET_BUNDLE_ACTIONS_FOR_BUNDLE_DURATION_TIMER_AVG,                             *oozie_bundle_action_query_executor_get_bundle_actions_for_bundle_duration_timer_avg},
     {OOZIE_BUNDLE_ACTION_QUERY_EXECUTOR_GET_BUNDLE_ACTIONS_FOR_BUNDLE_DURATION_TIMER_RATE,                            *oozie_bundle_action_query_executor_get_bundle_actions_for_bundle_duration_timer_rate},
     {OOZIE_BUNDLE_JOB_QUERY_EXECUTOR_GET_BUNDLE_JOB_DURATION_TIMER_AVG,                                               *oozie_bundle_job_query_executor_get_bundle_job_duration_timer_avg},
