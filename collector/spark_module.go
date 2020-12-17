@@ -170,7 +170,7 @@
        error_queries += 1
      }
    }
-   log.Debug_msg("In the SPARK Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
+   log.Info_msg("In the SPARK Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
    return nil
  }
  

@@ -334,7 +334,7 @@ func (ScrapeStatus) Scrape (ctx context.Context, config *Collector_connection_da
     eval_scrape(scrape_cluster_services_status(ctx, *config, fmt.Sprintf("clusters/%s/services", cluster), ch), &success_queries, &error_queries)
     eval_scrape(scrape_cluster_roles_status(ctx, *config, fmt.Sprintf("clusters/%s/services", cluster), ch), &success_queries, &error_queries)
   }
-  log.Debug_msg("In the Status Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
+  log.Info_msg("In the Status Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
   return nil
 }
 

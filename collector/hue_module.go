@@ -586,7 +586,7 @@ func (ScrapeHUE) Scrape (ctx context.Context, config *Collector_connection_data,
       error_queries += 1
     }
   }
-  log.Debug_msg("In the HUE Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
+  log.Info_msg("In the HUE Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
   return nil
 }
 
