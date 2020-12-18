@@ -285,7 +285,7 @@ func (ScrapeHost) Scrape (ctx context.Context, config *Collector_connection_data
 
   pclient := pool.GetPClient()
   // Make the list of the Hosts Types (Master, Worker, Border)
-  type_node_list = get_type_node_list(ctx, *config, pclient)
+  type_node_list = get_type_node_list(ctx, *config)
 
   // Queries counters
   success_queries := 0

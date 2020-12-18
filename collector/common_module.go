@@ -26,6 +26,7 @@ import (
   "net/http"
   "strconv"
   "strings"
+	"crypto/tls"
 
   // Own libraries
   jp "keedio/cloudera_exporter/json_parser"
@@ -87,17 +88,17 @@ func SendConf(conf interface{}) {
 func make_query(ctx context.Context, uri string, user string, passwd string, pclient *pool.PClient) (body string, err error) {
   log.Debug_msg("Making API Query: %s ", uri)
   
-  // var httpClient *http.Client
-  // // var req http.Request 
+  var httpClient *http.Client
+  // var req http.Request 
 
-  // if(Config.Api_request_type == "https") {
-  //   tr := &http.Transport{
-  //     TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-  //   }
-  //   httpClient = &http.Client{Transport: tr}
-  // }else{
-  //   httpClient = http.DefaultClient
-  // }
+  if(Config.Api_request_type == "https") {
+    tr := &http.Transport{
+      TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+    }
+    httpClient = &http.Client{Transport: tr}
+  }else{
+    httpClient = http.DefaultClient
+  }
 
   // Build the request Object
   req, err := http.NewRequest(http.MethodGet, uri, nil)
@@ -119,15 +120,14 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
   // Set Authentication credentials
   req.SetBasicAuth(user, passwd)
 
-  // var res *http.Response
+  var res *http.Response
   // var errRes *error
   // Make the API request
-  // if(pclient != nil){
-  //   res, err = pclient.DoPool(req)
-  // }else{
-  //   res, err = httpClient.Do(req)
-  // }
-  res, err := pclient.DoPool(req)
+  if(pclient != nil){
+    res, err = pclient.DoPool(req)
+  }else{
+    res, err = httpClient.Do(req)
+  }
   
   // res, err := httpClient.Do(req)
   // if(pclient) res, err := pool.GetPClient().Do(req)
@@ -163,7 +163,7 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
 
 
 // Create a empty map to storage the host_id as Key and a list of flags for Border, Worker or Master Host Role
-func init_host_types_map(ctx context.Context, config Collector_connection_data, pclient *pool.PClient) map[string] []string {
+func init_host_types_map(ctx context.Context, config Collector_connection_data) map[string] []string {
   node_map := make(map[string] []string)
 
   // Get Hosts list
@@ -176,7 +176,7 @@ func init_host_types_map(ctx context.Context, config Collector_connection_data, 
       fmt.Sprintf("hosts")),
     config.User,
     config.Passwd,
-    pclient,
+    nil,
   )
   json_hosts_results := jp.Parse_json_response(json_hosts_data)
   num_hosts, _ := strconv.Atoi(jp.Get_json_field(json_hosts_results, "items.#"))
@@ -189,7 +189,7 @@ func init_host_types_map(ctx context.Context, config Collector_connection_data, 
 
 
 // Activate the flags for the border nodes
-func look_for_border_nodes(ctx context.Context, config Collector_connection_data, cluster_name string, node_map map[string] []string, pclient *pool.PClient) map[string] []string {
+func look_for_border_nodes(ctx context.Context, config Collector_connection_data, cluster_name string, node_map map[string] []string) map[string] []string {
   json_type_data, _ := make_query(
     ctx,
     jp.Build_api_query_url(
@@ -199,7 +199,7 @@ func look_for_border_nodes(ctx context.Context, config Collector_connection_data
       fmt.Sprintf("clusters/%s/services/hdfs/roles", cluster_name)),
     config.User,
     config.Passwd,
-    pclient,
+    nil,
   )
 
   // Parse JSON Response
@@ -220,7 +220,7 @@ func look_for_border_nodes(ctx context.Context, config Collector_connection_data
 
 
 // Activate the flags for the worker nodes
-func look_for_worker_nodes(ctx context.Context, config Collector_connection_data, cluster_name string, node_map map[string] []string, pclient *pool.PClient) map[string] []string {
+func look_for_worker_nodes(ctx context.Context, config Collector_connection_data, cluster_name string, node_map map[string] []string) map[string] []string {
   json_type_data, _ := make_query(
     ctx,
     jp.Build_api_query_url(
@@ -230,7 +230,7 @@ func look_for_worker_nodes(ctx context.Context, config Collector_connection_data
       fmt.Sprintf("clusters/%s/services/hdfs/roles", cluster_name)),
     config.User,
     config.Passwd,
-    pclient,
+    nil,
   )
 
   // Parse JSON Response
@@ -250,7 +250,7 @@ func look_for_worker_nodes(ctx context.Context, config Collector_connection_data
 
 
 // Activate the flags for the master nodes
-func look_for_master_nodes(ctx context.Context, config Collector_connection_data, cluster_name string, node_map map[string] []string, pclient *pool.PClient) map[string] []string {
+func look_for_master_nodes(ctx context.Context, config Collector_connection_data, cluster_name string, node_map map[string] []string) map[string] []string {
   json_master_data, _ := make_query(
     ctx,
     jp.Build_api_query_url(
@@ -260,7 +260,7 @@ func look_for_master_nodes(ctx context.Context, config Collector_connection_data
       fmt.Sprintf("cm/service/roles")),
     config.User,
       config.Passwd,
-      pclient,
+      nil,
   )
 
   // Parse JSON Response
@@ -280,8 +280,8 @@ func look_for_master_nodes(ctx context.Context, config Collector_connection_data
 
 
 // fill and return the role map of hosts
-func get_type_node_list (ctx context.Context, config Collector_connection_data, pclient *pool.PClient) map[string] []string {
-  node_map := init_host_types_map(ctx, config, pclient)
+func get_type_node_list (ctx context.Context, config Collector_connection_data) map[string] []string {
+  node_map := init_host_types_map(ctx, config)
 
   // Get Cluster list
   json_clusters_data, _ := make_query(
@@ -293,7 +293,7 @@ func get_type_node_list (ctx context.Context, config Collector_connection_data, 
       fmt.Sprintf("clusters")),
     config.User,
     config.Passwd,
-    pclient,
+    nil,
   )
 
   // Parse JSON Response
@@ -302,9 +302,9 @@ func get_type_node_list (ctx context.Context, config Collector_connection_data, 
   num_clusters, _ := strconv.Atoi(jp.Get_json_field(json_clusters_results, "items.#"))
   for cluster_index := 0; cluster_index < num_clusters; cluster_index ++ {
     cluster_name := jp.Get_json_field(json_clusters_results, fmt.Sprintf("items.%d.name", cluster_index))
-    node_map = look_for_border_nodes(ctx, config, cluster_name, node_map, pclient)
-    node_map = look_for_master_nodes(ctx, config, cluster_name, node_map, pclient)
-    node_map = look_for_worker_nodes(ctx, config, cluster_name, node_map, pclient)
+    node_map = look_for_border_nodes(ctx, config, cluster_name, node_map)
+    node_map = look_for_master_nodes(ctx, config, cluster_name, node_map)
+    node_map = look_for_worker_nodes(ctx, config, cluster_name, node_map)
   }
   return node_map
 }
@@ -352,7 +352,7 @@ func make_and_parse_timeseries_query(ctx context.Context, config Collector_conne
 
 
 // Make and parse a Cloudera API Query
-func make_and_parse_api_query(ctx context.Context, config Collector_connection_data, query string, pclient *pool.PClient) (result gjson.Result, err error) {
+func make_and_parse_api_query(ctx context.Context, config Collector_connection_data, query string) (result gjson.Result, err error) {
   // Make query
   json_timeseries, err := make_query(
     ctx,
@@ -363,7 +363,7 @@ func make_and_parse_api_query(ctx context.Context, config Collector_connection_d
       query),
     config.User,
     config.Passwd,
-    pclient,
+    nil,
   )
 
   // parse and return the result
@@ -372,9 +372,9 @@ func make_and_parse_api_query(ctx context.Context, config Collector_connection_d
 
 
 // Returns a string with the Cloudera Manager version
-func get_cloudera_manager_version(ctx context.Context, config Collector_connection_data, pclient *pool.PClient) string {
+func get_cloudera_manager_version(ctx context.Context, config Collector_connection_data) string {
   // Make query
-  json_parsed, err := make_and_parse_api_query(ctx, config, "cm/version", pclient)
+  json_parsed, err := make_and_parse_api_query(ctx, config, "cm/version")
   if err != nil {
     return ""
   }
@@ -383,14 +383,14 @@ func get_cloudera_manager_version(ctx context.Context, config Collector_connecti
 
 
 // Returns a string with the highest version of the Cloudera API
-func Get_api_cloudera_version(ctx context.Context, config Collector_connection_data, pclient *pool.PClient) (string, error) {
+func Get_api_cloudera_version(ctx context.Context, config Collector_connection_data) (string, error) {
   // Make query
   json_parsed, err := make_query(
     ctx,
     fmt.Sprintf("http://%s:%s/api/version", config.Host, config.Port),
     config.User,
     config.Passwd,
-    pclient,
+    nil,
   )
   if err != nil {
     return "", errors.New("The exporter can not determine the API version by consulting the cloudera Manager API")

@@ -24,7 +24,6 @@ import (
   // Own libraries
   jp "keedio/cloudera_exporter/json_parser"
   log "keedio/cloudera_exporter/logger"
-  pool "keedio/cloudera_exporter/pool"
 
   // Go Prometheus libraries
 	"github.com/prometheus/client_golang/prometheus"
@@ -137,8 +136,8 @@ func get_value_from_state (state string) float64 {
 }
 
 // Function to Scrape the Hosts Status Metrics
-func scrape_cluster_hosts_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
-  json_parsed, err := make_and_parse_api_query(ctx, config, query, pclient)
+func scrape_cluster_hosts_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric) bool {
+  json_parsed, err := make_and_parse_api_query(ctx, config, query)
   if err != nil {
     return false
   }
@@ -152,7 +151,7 @@ func scrape_cluster_hosts_status(ctx context.Context, config Collector_connectio
     host_commission_state := jp.Get_api_query_host_commission_state(json_parsed, counter_hosts)
     host_maintenance_mode := jp.Get_api_query_host_maintenance_mode(json_parsed, counter_hosts)
     query_by_host := fmt.Sprintf("%s/%s", query, host_id)
-    json_parsed_by_host, _ := make_and_parse_api_query(ctx, config, query_by_host, pclient)
+    json_parsed_by_host, _ := make_and_parse_api_query(ctx, config, query_by_host)
     host_health_summary := jp.Get_api_query_host_health_summary(json_parsed_by_host)
     host_healt_summary_value := get_value_from_state(host_health_summary)
     ch <- prometheus.MustNewConstMetric(globalHostsDesc, prometheus.GaugeValue, host_healt_summary_value, host_id, host_name, host_ip, host_commission_state, host_maintenance_mode, host_health_summary)
@@ -161,8 +160,8 @@ func scrape_cluster_hosts_status(ctx context.Context, config Collector_connectio
 }
 
 // Function to Scrape the Cluster Status Metric
-func scrape_cluster_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
-  json_parsed, err := make_and_parse_api_query(ctx, config, query, pclient)
+func scrape_cluster_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric) bool {
+  json_parsed, err := make_and_parse_api_query(ctx, config, query)
   if err != nil {
     return false
   }
@@ -178,8 +177,8 @@ func scrape_cluster_status(ctx context.Context, config Collector_connection_data
 }
 
 // Function to Scrape the Services Status Metrics
-func scrape_cluster_services_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
-  json_parsed, err := make_and_parse_api_query(ctx, config, query, pclient)
+func scrape_cluster_services_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric) bool {
+  json_parsed, err := make_and_parse_api_query(ctx, config, query)
   if err != nil {
     return false
   }
@@ -197,9 +196,9 @@ func scrape_cluster_services_status(ctx context.Context, config Collector_connec
 }
 
 // Function to Scrape the Cloudera Management Services Status Metrics
-func scrape_cluster_cm_services_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric, pclient *pool.PClient) bool {
+func scrape_cluster_cm_services_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric) bool {
   // Cloudera Management Services
-  json_parsed, err := make_and_parse_api_query(ctx, config, query, pclient)
+  json_parsed, err := make_and_parse_api_query(ctx, config, query)
   if err != nil {
     return false
   }
@@ -224,8 +223,8 @@ func scrape_cluster_cm_services_status(ctx context.Context, config Collector_con
 }
 
 // Function that returns to a map with the hostName and HostId
-func scrape_hostName(ctx context.Context, config Collector_connection_data, query string, pclient *pool.PClient) map[string]string {
-  json_parsed,err:= make_and_parse_api_query(ctx, config, query, pclient)
+func scrape_hostName(ctx context.Context, config Collector_connection_data, query string) map[string]string {
+  json_parsed,err:= make_and_parse_api_query(ctx, config, query)
   if err != nil {
 
   }
@@ -249,9 +248,9 @@ func Get_hostName_with_hostId( mapHosName map[string]string, hostId string) stri
 
 
 // Function to Scrape the Roles Status Metrics
-func scrape_cluster_roles_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric, pclient *pool.PClient) bool{
-  json_parsed_service, err := make_and_parse_api_query(ctx, config, query, pclient)
-  mapHost := scrape_hostName(ctx, config, "hosts", pclient)
+func scrape_cluster_roles_status(ctx context.Context, config Collector_connection_data, query string, ch chan<- prometheus.Metric) bool{
+  json_parsed_service, err := make_and_parse_api_query(ctx, config, query)
+  mapHost := scrape_hostName(ctx, config, "hosts")
 
   if err != nil {
     return false
@@ -260,7 +259,7 @@ func scrape_cluster_roles_status(ctx context.Context, config Collector_connectio
   num_services := jp.Get_api_query_items_num(json_parsed_service)
   for counter_services := 0; counter_services < int(num_services); counter_services++ {
     service_name := jp.Get_api_query_service_name(json_parsed_service, counter_services)
-    json_parsed_roles, _ := make_and_parse_api_query(ctx, config, fmt.Sprintf("%s/%s/roles", query, service_name), pclient)
+    json_parsed_roles, _ := make_and_parse_api_query(ctx, config, fmt.Sprintf("%s/%s/roles", query, service_name))
     num_roles := jp.Get_api_query_items_num(json_parsed_roles)
     for counter_roles := 0; counter_roles < int(num_roles); counter_roles++ {
       role_name := jp.Get_api_query_role_name(json_parsed_roles, counter_roles)
@@ -318,26 +317,24 @@ func (ScrapeStatus) Scrape (ctx context.Context, config *Collector_connection_da
   success_queries := 0
   error_queries := 0
 
-  pclient := pool.GetPClient()
   // Get Clusters list
-  json_clusters, err := make_and_parse_api_query(ctx, *config, "clusters", pclient)
+  json_clusters, err := make_and_parse_api_query(ctx, *config, "clusters")
   if err != nil {
     return nil
   }
 
-
-  eval_scrape(scrape_cluster_hosts_status(ctx, *config, "hosts", ch, pclient), &success_queries, &error_queries)
-  eval_scrape(scrape_cluster_cm_services_status(ctx, *config, "cm/service", ch, pclient), &success_queries, &error_queries)
+  eval_scrape(scrape_cluster_hosts_status(ctx, *config, "hosts", ch), &success_queries, &error_queries)
+  eval_scrape(scrape_cluster_cm_services_status(ctx, *config, "cm/service", ch), &success_queries, &error_queries)
 
   clustersName := jp.Get_api_query_clusters_list(json_clusters)
   for c_clusters := 0; c_clusters < len(clustersName); c_clusters++ {
     cluster := clustersName[c_clusters].String()
 
-    eval_scrape(scrape_cluster_status(ctx, *config, fmt.Sprintf("clusters/%s", cluster), ch, pclient), &success_queries, &error_queries)
-    eval_scrape(scrape_cluster_services_status(ctx, *config, fmt.Sprintf("clusters/%s/services", cluster), ch, pclient), &success_queries, &error_queries)
-    eval_scrape(scrape_cluster_roles_status(ctx, *config, fmt.Sprintf("clusters/%s/services", cluster), ch, pclient), &success_queries, &error_queries)
+    eval_scrape(scrape_cluster_status(ctx, *config, fmt.Sprintf("clusters/%s", cluster), ch), &success_queries, &error_queries)
+    eval_scrape(scrape_cluster_services_status(ctx, *config, fmt.Sprintf("clusters/%s/services", cluster), ch), &success_queries, &error_queries)
+    eval_scrape(scrape_cluster_roles_status(ctx, *config, fmt.Sprintf("clusters/%s/services", cluster), ch), &success_queries, &error_queries)
   }
-  log.Info_msg("In the Status Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
+  log.Debug_msg("In the Status Module has been executed %d queries. %d success and %d with errors", success_queries + error_queries, success_queries, error_queries)
   return nil
 }
 

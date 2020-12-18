@@ -158,7 +158,6 @@ func register_scrapers (config *cp.CE_config) []cl.Scraper{
 // Read the flags and the config file and set all the values of the
 // Configuration Structure
 func parse_flags_and_config_file() error {
-  pclient := pool.GetPClient()
   var err error
 
   // Parse flags and config file
@@ -189,7 +188,7 @@ func parse_flags_and_config_file() error {
   // Check if Api_version is defined on the config file, else, the version is
   // obtained by Cloudera Manager API
   if config.Connection.Api_version == "" {
-    if config.Connection.Api_version, err = cl.Get_api_cloudera_version(nil, config.Connection, pclient); err != nil {
+    if config.Connection.Api_version, err = cl.Get_api_cloudera_version(nil, config.Connection); err != nil {
       return err
     }
   }
@@ -218,8 +217,8 @@ func main(){
   log.Init(os.Stdout, os.Stdout, os.Stdout, os.Stderr, os.Stdout, config.Log_level)
 
   // Create HttpPool
-  // pool.Init(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
-  pool.InitConfig(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
+  pool.Init(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
+  // pool.InitConfig(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
 
   //Parallel Execution
   runtime.GOMAXPROCS(config.Num_procs)
@@ -232,10 +231,7 @@ func main(){
   log.Info_msg("Registering Handlers")
   handlerFunc := newHandler(cl.NewMetrics(), register_scrapers(config))
   http.Handle(metrics_path, promhttp.InstrumentMetricHandler(prometheus.DefaultRegisterer, handlerFunc))
-  http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { 
-    w.Write(landingPage) 
-    defer r.Body.Close()
-  })
+  http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { w.Write(landingPage) })
   log.Ok_msg("Landing Page and Handlers are running")
 
 
