@@ -283,7 +283,7 @@ func (ScrapeHost) Version() float64 {
 func (ScrapeHost) Scrape (ctx context.Context, config *Collector_connection_data, ch chan<- prometheus.Metric) error {
   log.Debug_msg("Ejecutando Hosts Metrics Scraper")
 
-  pclient := pool.NewPClient()
+  pclient := pool.GetPClient()
   // Make the list of the Hosts Types (Master, Worker, Border)
   type_node_list = get_type_node_list(ctx, *config, pclient)
 

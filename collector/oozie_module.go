@@ -379,7 +379,7 @@ OOZIE_WRITE_BYTES_RATE                                                          
    success_queries := 0
    error_queries := 0
  
-   pclient := pool.NewPClient()
+   pclient := pool.GetPClient()
    // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
    for i:=0 ; i < len(oozie_query_variable_relationship) ; i++ {
      if create_oozie_metric(ctx, *config, oozie_query_variable_relationship[i].Query, oozie_query_variable_relationship[i].Metric_struct, ch, pclient) {

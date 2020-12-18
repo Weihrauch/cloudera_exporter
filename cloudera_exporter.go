@@ -158,7 +158,7 @@ func register_scrapers (config *cp.CE_config) []cl.Scraper{
 // Read the flags and the config file and set all the values of the
 // Configuration Structure
 func parse_flags_and_config_file() error {
-  pclient := pool.NewPClient()
+  pclient := pool.GetPClient()
   var err error
 
   // Parse flags and config file

@@ -411,7 +411,7 @@ func (ScrapeHUE) Scrape (ctx context.Context, config *Collector_connection_data,
   success_queries := 0
   error_queries := 0
 
-  pclient := pool.NewPClient()
+  pclient := pool.GetPClient()
   // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
   for i:=0 ; i < len(hue_query_variable_relationship) ; i++ {
     if create_hue_metric(ctx, *config, hue_query_variable_relationship[i].Query, hue_query_variable_relationship[i].Metric_struct, ch, pclient) {

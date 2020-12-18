@@ -318,7 +318,7 @@ func (ScrapeStatus) Scrape (ctx context.Context, config *Collector_connection_da
   success_queries := 0
   error_queries := 0
 
-  pclient := pool.NewPClient()
+  pclient := pool.GetPClient()
   // Get Clusters list
   json_clusters, err := make_and_parse_api_query(ctx, *config, "clusters", pclient)
   if err != nil {
