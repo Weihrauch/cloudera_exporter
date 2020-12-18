@@ -148,15 +148,13 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
     }
   
     
-  
-    return string(content), err
-  }
+    res.Body.Close()
   
   // res, err := httpClient.Do(req)
   // if(pclient) res, err := pool.GetPClient().Do(req)
-  else{
+    return string(content), err
+  }else{
     res, err := httpClient.Do(req)
-    res.Body.Close()
   if err != nil {
     log.Err_msg("%s", err)
     return "", err
@@ -181,6 +179,7 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
   }
 
   
+  res.Body.Close()
 
   return string(content), err
 }
