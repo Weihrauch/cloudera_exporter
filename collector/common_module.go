@@ -120,18 +120,43 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
   // Set Authentication credentials
   req.SetBasicAuth(user, passwd)
 
-  var res *http.Response
   // var errRes *error
   // Make the API request
   if(pclient != nil){
-    res, err = pclient.Do(req)
-  }else{
-    res, err = httpClient.Do(req)
+    res, err := pclient.Do(req)
+    if err != nil {
+      log.Err_msg("%s", err)
+      return "", err
+    }
+    if res == nil {
+      log.Err_msg("HTTP response is NULL")
+      return "", errors.New("HTTP response is NULL")
+    }
+    if res.StatusCode < 200 || res.StatusCode >= 400 {
+      log.Err_msg("Invalid HTTP response code: %s for the request: %s", res.Status, uri)
+      res.Body.Close()
+      return "", errors.New("Invalid HTTP response code")
+    }
+  
+    // Get Body Response
+    content, err := ioutil.ReadAll(res.Body)
+  
+    if err != nil {
+      log.Err_msg("Failed to parse response with error: %s", err)
+      res.Body.Close()
+      return "", err
+    }
+  
+    
+  
+    return string(content), err
   }
   
   // res, err := httpClient.Do(req)
   // if(pclient) res, err := pool.GetPClient().Do(req)
-
+  else{
+    res, err := httpClient.Do(req)
+    res.Body.Close()
   if err != nil {
     log.Err_msg("%s", err)
     return "", err
@@ -142,22 +167,23 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
   }
   if res.StatusCode < 200 || res.StatusCode >= 400 {
     log.Err_msg("Invalid HTTP response code: %s for the request: %s", res.Status, uri)
-    defer res.Body.Close()
+    res.Body.Close()
     return "", errors.New("Invalid HTTP response code")
   }
 
-  defer res.Body.Close()
   // Get Body Response
   content, err := ioutil.ReadAll(res.Body)
 
   if err != nil {
     log.Err_msg("Failed to parse response with error: %s", err)
-    defer res.Body.Close()
+    res.Body.Close()
     return "", err
   }
 
+  
 
   return string(content), err
+}
 }
 
 

@@ -109,8 +109,7 @@ func NewPClient() *PClient {
 // Do is a method that 'overloads' the http.Client Do method for drop-in
 // compatibility with existing codebases.
 func (c *PClient) Do(req *http.Request) (*http.Response, error) {
-	// return c.DoPool(req)
-	return c.client.Do(req)
+	return c.DoPool(req)
 }
 
 // DoPool does the required synchronization with channels to
