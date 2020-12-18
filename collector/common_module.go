@@ -124,7 +124,7 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
   // var errRes *error
   // Make the API request
   if(pclient != nil){
-    res, err = pclient.Do(req)
+    res, err = pclient.DoPool(req)
   }else{
     res, err = httpClient.Do(req)
   }
