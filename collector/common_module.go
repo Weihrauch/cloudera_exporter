@@ -120,16 +120,16 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
   // Set Authentication credentials
   req.SetBasicAuth(user, passwd)
 
-  // var res *http.Response
-  // // var errRes *error
-  // // Make the API request
-  // if(pclient != nil){
-  //   res, err = pclient.DoPool(req)
-  // }else{
-  //   res, err = httpClient.Do(req)
-  // }
+  var res *http.Response
+  // var errRes *error
+  // Make the API request
+  if(pclient != nil){
+    res, err = pclient.DoPool(req)
+  }else{
+    res, err = httpClient.Do(req)
+  }
   
-  res, err := httpClient.Do(req)
+  // res, err := httpClient.Do(req)
   // if(pclient) res, err := pool.GetPClient().Do(req)
 
   if err != nil {
