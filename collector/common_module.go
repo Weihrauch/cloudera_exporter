@@ -146,6 +146,7 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
     return "", errors.New("Invalid HTTP response code")
   }
 
+  defer res.Body.Close()
   // Get Body Response
   content, err := ioutil.ReadAll(res.Body)
 
@@ -155,7 +156,6 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
     return "", err
   }
 
-  defer res.Body.Close()
 
   return string(content), err
 }
