@@ -231,7 +231,10 @@ func main(){
   log.Info_msg("Registering Handlers")
   handlerFunc := newHandler(cl.NewMetrics(), register_scrapers(config))
   http.Handle(metrics_path, promhttp.InstrumentMetricHandler(prometheus.DefaultRegisterer, handlerFunc))
-  http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { w.Write(landingPage) })
+  http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { 
+    w.Write(landingPage)
+    defer r.Body.Close()
+  })
   log.Ok_msg("Landing Page and Handlers are running")
 
 

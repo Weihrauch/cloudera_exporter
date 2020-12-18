@@ -142,7 +142,7 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
   }
   if res.StatusCode < 200 || res.StatusCode >= 400 {
     log.Err_msg("Invalid HTTP response code: %s for the request: %s", res.Status, uri)
-    res.Body.Close()
+    defer res.Body.Close()
     return "", errors.New("Invalid HTTP response code")
   }
 
@@ -151,11 +151,11 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
 
   if err != nil {
     log.Err_msg("Failed to parse response with error: %s", err)
-    res.Body.Close()
+    defer res.Body.Close()
     return "", err
   }
 
-  res.Body.Close()
+  defer res.Body.Close()
 
   return string(content), err
 }
