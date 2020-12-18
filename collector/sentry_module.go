@@ -245,7 +245,7 @@
    success_queries := 0
    error_queries := 0
  
-   pclient := pool.GetPClient()
+   pclient := pool.NewPClient()
    // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
    for i:=0 ; i < len(sentry_query_variable_relationship) ; i++ {
      if create_sentry_metric(ctx, *config, sentry_query_variable_relationship[i].Query, sentry_query_variable_relationship[i].Metric_struct, ch, pclient) {

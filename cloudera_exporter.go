@@ -217,8 +217,8 @@ func main(){
   log.Init(os.Stdout, os.Stdout, os.Stdout, os.Stderr, os.Stdout, config.Log_level)
 
   // Create HttpPool
-  pool.Init(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
-  // pool.InitConfig(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
+  // pool.Init(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
+  pool.InitConfig(config.Api_request_type, config.Max_connexions, config.Req_per_seconds)
 
   //Parallel Execution
   runtime.GOMAXPROCS(config.Num_procs)

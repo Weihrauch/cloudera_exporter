@@ -306,7 +306,7 @@ func (ScrapeImpalaMetrics) Scrape(ctx context.Context, config *Collector_connect
   success_queries := 0
   error_queries := 0
   
-  pclient := pool.GetPClient()
+  pclient := pool.NewPClient()
   // Get Cloudera Version
   cm_version := get_cloudera_manager_version(ctx, *config)
   log.Debug_msg("Version Cloudera: %s", cm_version)

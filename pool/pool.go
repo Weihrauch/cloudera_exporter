@@ -9,7 +9,7 @@ package pool
 import (
 	"net/http"
 	"time"
-	// "crypto/tls"
+	"crypto/tls"
 )
 
 // Client is a an interface common with http.Client
@@ -49,67 +49,68 @@ type PClient struct {
 	rateLimiter  <-chan time.Time
 }
 
-// NewPClient returns a *PClient that wraps an *http.Client and sets the
-// maximum pool size as well as the requests per second as integers.
-//
-// A zero for maxPoolSize will set no limit
-// A zero for reqPerSec will set no limit
-func NewPClient(stdClient *http.Client, maxPoolSize int, reqPerSec int) *PClient {
-	var semaphore chan int = nil
-	if maxPoolSize > 0 {
-		semaphore = make(chan int, maxPoolSize) // Buffered channel to act as a semaphore
-	}
-
-	var emitter <-chan time.Time = nil
-	if reqPerSec > 0 {
-		emitter = time.NewTicker(time.Second / time.Duration(reqPerSec)).C // x req/s == 1s/x req (inverse)
-	}
-
-	return &PClient{
-		client:       stdClient,
-		maxPoolSize:  maxPoolSize,
-		cSemaphore:   semaphore,
-		reqPerSecond: reqPerSec,
-		rateLimiter:  emitter,
-	}
-}
-
-// func NewPClient() *PClient {
-// 	conf := GetConfig()
-// 	var httpClient *http.Client
-// 	// var req http.Request 
-// 	if(conf.Api_request_type == "https") {
-// 	  tr := &http.Transport{
-// 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-// 	  }
-// 	  httpClient = &http.Client{Transport: tr}
-// 	}else{
-// 	  httpClient = http.DefaultClient
-// 	}
-
+// // NewPClient returns a *PClient that wraps an *http.Client and sets the
+// // maximum pool size as well as the requests per second as integers.
+// //
+// // A zero for maxPoolSize will set no limit
+// // A zero for reqPerSec will set no limit
+// func NewPClient(stdClient *http.Client, maxPoolSize int, reqPerSec int) *PClient {
 // 	var semaphore chan int = nil
-// 	if conf.Max_connexions > 0 {
-// 		semaphore = make(chan int, conf.Max_connexions) // Buffered channel to act as a semaphore
+// 	if maxPoolSize > 0 {
+// 		semaphore = make(chan int, maxPoolSize) // Buffered channel to act as a semaphore
 // 	}
 
 // 	var emitter <-chan time.Time = nil
-// 	if conf.Req_per_seconds > 0 {
-// 		emitter = time.NewTicker(time.Second / time.Duration(conf.Req_per_seconds)).C // x req/s == 1s/x req (inverse)
+// 	if reqPerSec > 0 {
+// 		emitter = time.NewTicker(time.Second / time.Duration(reqPerSec)).C // x req/s == 1s/x req (inverse)
 // 	}
 
 // 	return &PClient{
-// 		client:       httpClient,
-// 		maxPoolSize:  conf.Max_connexions,
+// 		client:       stdClient,
+// 		maxPoolSize:  maxPoolSize,
 // 		cSemaphore:   semaphore,
-// 		reqPerSecond: conf.Req_per_seconds,
+// 		reqPerSecond: reqPerSec,
 // 		rateLimiter:  emitter,
 // 	}
 // }
 
+func NewPClient() *PClient {
+	conf := GetConfig()
+	var httpClient *http.Client
+	// var req http.Request 
+	if(conf.Api_request_type == "https") {
+	  tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	  }
+	  httpClient = &http.Client{Transport: tr}
+	}else{
+	  httpClient = http.DefaultClient
+	}
+
+	var semaphore chan int = nil
+	if conf.Max_connexions > 0 {
+		semaphore = make(chan int, conf.Max_connexions) // Buffered channel to act as a semaphore
+	}
+
+	var emitter <-chan time.Time = nil
+	if conf.Req_per_seconds > 0 {
+		emitter = time.NewTicker(time.Second / time.Duration(conf.Req_per_seconds)).C // x req/s == 1s/x req (inverse)
+	}
+
+	return &PClient{
+		client:       httpClient,
+		maxPoolSize:  conf.Max_connexions,
+		cSemaphore:   semaphore,
+		reqPerSecond: conf.Req_per_seconds,
+		rateLimiter:  emitter,
+	}
+}
+
 // Do is a method that 'overloads' the http.Client Do method for drop-in
 // compatibility with existing codebases.
 func (c *PClient) Do(req *http.Request) (*http.Response, error) {
-	return c.DoPool(req)
+	// return c.DoPool(req)
+	return c.client.Do(req)
 }
 
 // DoPool does the required synchronization with channels to

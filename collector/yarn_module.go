@@ -373,7 +373,7 @@
    success_queries := 0
    error_queries := 0
 
-   pclient := pool.GetPClient()
+   pclient := pool.NewPClient()
    // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
    for i:=0 ; i < len(yarn_query_variable_relationship) ; i++ {
      if create_yarn_metric(ctx, *config, yarn_query_variable_relationship[i].Query, yarn_query_variable_relationship[i].Metric_struct, ch, pclient) {
