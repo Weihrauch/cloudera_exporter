@@ -305,14 +305,14 @@ func (ScrapeImpalaMetrics) Scrape(ctx context.Context, config *Collector_connect
   // Queries counters
   success_queries := 0
   error_queries := 0
-
+  
+  pclient := pool.NewPClient()
   // Get Cloudera Version
-  cm_version := get_cloudera_manager_version(ctx, *config)
+  cm_version := get_cloudera_manager_version(ctx, *config, pclient)
   log.Debug_msg("Version Cloudera: %s", cm_version)
   load_impala_queries(cm_version)
 
 
-  pclient := pool.NewPClient()
   // Execute the generic funtion for creation of metrics with the pairs (QUERY, PROM:DESCRIPTOR)
   for i:=0 ; i < len(impala_query_variable_relationship) ; i++ {
     if create_impala_metric(ctx, *config, *impala_query_variable_relationship[i].Query, impala_query_variable_relationship[i].Metric_struct, ch, pclient) {

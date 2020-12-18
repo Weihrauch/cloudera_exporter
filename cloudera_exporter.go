@@ -158,6 +158,7 @@ func register_scrapers (config *cp.CE_config) []cl.Scraper{
 // Read the flags and the config file and set all the values of the
 // Configuration Structure
 func parse_flags_and_config_file() error {
+  pclient := pool.NewPClient()
   var err error
 
   // Parse flags and config file
@@ -188,7 +189,7 @@ func parse_flags_and_config_file() error {
   // Check if Api_version is defined on the config file, else, the version is
   // obtained by Cloudera Manager API
   if config.Connection.Api_version == "" {
-    if config.Connection.Api_version, err = cl.Get_api_cloudera_version(nil, config.Connection); err != nil {
+    if config.Connection.Api_version, err = cl.Get_api_cloudera_version(nil, config.Connection, pclient); err != nil {
       return err
     }
   }
