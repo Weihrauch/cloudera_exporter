@@ -93,11 +93,17 @@ func make_query(ctx context.Context, uri string, user string, passwd string, pcl
 
   if(Config.Api_request_type == "https") {
     tr := &http.Transport{
-      TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-    }
+      TLSClientConfig: &tls.Config{InsecureSkipVerify: true},      
+        MaxIdleConns:       20,
+        MaxIdleConnsPerHost:  20,
+      }
     httpClient = &http.Client{Transport: tr}
   }else{
-    httpClient = http.DefaultClient
+    tr := &http.Transport{    
+        MaxIdleConns:       20,
+        MaxIdleConnsPerHost:  20,
+      }
+    httpClient = &http.Client{Transport: tr}
   }
 
   // Build the request Object
